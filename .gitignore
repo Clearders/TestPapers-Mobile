@@ -1,0 +1,47 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+*.jks
+*.key
+*.keystore
+*.mobileprovision
+*.p12
+*.p8
+*.pem
+*.pfx
+GoogleService-Info.plist
+google-services.json
+keystore.properties
+
+# Editors and operating systems
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Dart / Flutter
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+build/
+coverage/
+doc/api/
+
+# Android
+android/.gradle/
+android/key.properties
+android/local.properties
+
+# iOS
+ios/Flutter/ephemeral/
+ios/Pods/
+ios/.symlinks/
+
+# Test and tool caches
+.cache/
+.pytest_cache/
+.ruff_cache/
+__pycache__/
+*.py[cod]
