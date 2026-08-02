@@ -1,0 +1,21 @@
+generatorName: dart-dio
+inputSpec: contracts/openapi.json
+outputDir: packages/cloud_api
+additionalProperties:
+  dateLibrary: core
+  disallowAdditionalPropertiesIfNotPresent: false
+  enumUnknownDefaultCase: true
+  hideGenerationTimestamp: true
+  pubDescription: Generated Dart/Dio client for the TestPapers Cloud API contract.
+  pubHomepage: https://github.com/Clearders/TestPapers-Mobile
+  pubLibrary: testpapers_cloud_api
+  pubName: testpapers_cloud_api
+  pubPublishTo: none
+  pubRepository: https://github.com/Clearders/TestPapers-Mobile
+  pubVersion: 1.0.0
+  serializationLibrary: built_value
+globalProperties:
+  apiDocs: "false"
+  apiTests: "false"
+  modelDocs: "false"
+  modelTests: "false"

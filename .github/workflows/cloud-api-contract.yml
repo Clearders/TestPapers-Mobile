@@ -1,0 +1,56 @@
+name: Cloud API Contract
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cloud-api-contract-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  OPENAPI_GENERATOR_VERSION: "7.24.0"
+
+jobs:
+  dart-contract:
+    name: Dart contract
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up Java
+        uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Set up Dart
+        uses: dart-lang/setup-dart@65eb853c7ba17dde3be364c3d2858773e7144260 # v1
+        with:
+          sdk: "3.12.2"
+
+      - name: Verify generated contract drift
+        run: python scripts/check_cloud_api_drift.py
+
+      - name: Resolve pinned package dependencies
+        working-directory: packages/cloud_api
+        run: dart pub get --enforce-lockfile
+
+      - name: Verify Dart formatting
+        working-directory: packages/cloud_api
+        run: dart format --output=none --set-exit-if-changed lib test
+
+      - name: Analyze Dart package
+        working-directory: packages/cloud_api
+        run: dart analyze
+
+      - name: Test Dart package
+        working-directory: packages/cloud_api
+        run: dart test

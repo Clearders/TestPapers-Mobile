@@ -32,6 +32,29 @@ REQUIRED_FILES = (
     "SECURITY.md",
     "scripts/check_repository_baseline.py",
 )
+MOBILE_CONTRACT_FILES = (
+    ".github/workflows/cloud-api-contract.yml",
+    "contracts/contract.lock.json",
+    "contracts/dart-dio-config.yaml",
+    "contracts/openapi.json",
+    "packages/cloud_api/lib/cloud_api.dart",
+    "packages/cloud_api/lib/src/cloud_api_adapter.dart",
+    "packages/cloud_api/lib/testpapers_cloud_api.dart",
+    "packages/cloud_api/pubspec.lock",
+    "packages/cloud_api/pubspec.yaml",
+    "packages/cloud_api/test/cloud_api_adapter_test.dart",
+    "scripts/check_cloud_api_drift.py",
+    "scripts/cloud_api_codegen.py",
+    "scripts/regenerate_cloud_api.py",
+)
+MOBILE_FORBIDDEN_SCAFFOLD = (
+    ".metadata",
+    "android",
+    "ios",
+    "lib/main.dart",
+    "packages/cloud_api/android",
+    "packages/cloud_api/ios",
+)
 MANIFEST_NAMES = {
     "Cargo.toml",
     "package.json",
@@ -60,11 +83,18 @@ FORBIDDEN_REPOSITORIES = (
     "TestPapers-Desktop",
     "TestPapers-Mobile",
 )
+IGNORED_DIRECTORY_NAMES = {
+    ".cache",
+    ".dart_tool",
+    ".git",
+    ".pub",
+    "build",
+}
 
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Validate the code-neutral TestPapers repository governance baseline."
+        description="Validate the TestPapers repository governance and runtime boundary baseline."
     )
     parser.add_argument("--repository", required=True, choices=sorted(REPOSITORIES))
     return parser.parse_args()
@@ -92,6 +122,15 @@ def validate(repository: str, root: Path) -> list[str]:
         candidate = root / relative
         if not candidate.is_file() or candidate.stat().st_size == 0:
             errors.append(f"missing or empty required file: {relative}")
+
+    if repository == "TestPapers-Mobile":
+        for relative in MOBILE_CONTRACT_FILES:
+            candidate = root / relative
+            if not candidate.is_file() or candidate.stat().st_size == 0:
+                errors.append(f"missing or empty Mobile contract file: {relative}")
+        for relative in MOBILE_FORBIDDEN_SCAFFOLD:
+            if (root / relative).exists():
+                errors.append(f"Flutter application scaffold is deferred: {relative}")
 
     readme = read_utf8(root / "README.md", errors)
     required_readme_tokens = (
@@ -128,9 +167,9 @@ def validate(repository: str, root: Path) -> list[str]:
         re.IGNORECASE,
     )
     for path in root.rglob("*"):
-        if ".git" in path.parts:
-            continue
         relative = path.relative_to(root)
+        if any(part in IGNORED_DIRECTORY_NAMES for part in relative.parts):
+            continue
         if path.is_symlink() and not path.resolve().is_relative_to(root.resolve()):
             errors.append(f"external symlink is forbidden: {relative.as_posix()}")
         if path.is_file() and matches_secret(path):
@@ -143,6 +182,28 @@ def validate(repository: str, root: Path) -> list[str]:
                 errors.append(
                     f"cross-repository relative dependency is forbidden: {relative.as_posix()}"
                 )
+
+    if repository == "TestPapers-Mobile":
+        pubspecs = sorted(
+            path.relative_to(root).as_posix()
+            for path in root.rglob("pubspec.yaml")
+            if not any(
+                part in IGNORED_DIRECTORY_NAMES
+                for part in path.relative_to(root).parts
+            )
+        )
+        if pubspecs != ["packages/cloud_api/pubspec.yaml"]:
+            errors.append(
+                "only the standalone packages/cloud_api/pubspec.yaml is allowed; "
+                f"found: {', '.join(pubspecs) or 'none'}"
+            )
+        cloud_pubspec = root / "packages/cloud_api/pubspec.yaml"
+        if cloud_pubspec.is_file():
+            content = read_utf8(cloud_pubspec, errors)
+            if re.search(r"^\s*flutter\s*:", content, re.MULTILINE) or re.search(
+                r"sdk\s*:\s*flutter", content
+            ):
+                errors.append("packages/cloud_api must remain a Dart-only package")
 
     return errors
 

@@ -2,7 +2,7 @@
 
 Mobile companion repository for the TestPapers Platform v2.
 
-> Status: repository governance baseline only; no Flutter application has been generated yet.
+> Status: generated Dart Cloud contract package available; the Flutter application remains deferred.
 > Runtime owner: Mobile team.
 > Release unit: signed Android and iOS applications.
 > Bootstrap issue: [CLE-58](https://linear.app/clearders/issue/CLE-58).
@@ -15,10 +15,11 @@ The canonical repository topology, runtime boundaries, and dependency direction 
 
 ## Current scope
 
-The M1 baseline contains governance and validation only. It intentionally does not contain:
+The CLE-14 baseline adds a standalone generated Dart/Dio contract package at `packages/cloud_api`. It intentionally does not contain:
 
-- a Flutter, Dart, Android, iOS, or SQLite project;
-- application source, generated API clients, or store/release workflows;
+- Flutter application, Android, iOS, or SQLite scaffolding;
+- Mobile UI or application source;
+- store or release workflows;
 - signing keys, provisioning profiles, push credentials, cloud tokens, or other secrets.
 
 [CLE-35](https://linear.app/clearders/issue/CLE-35) will generate the Flutter Android/iOS shell and secure authentication in this existing repository. [CLE-36](https://linear.app/clearders/issue/CLE-36) will add the SQLite cache and synchronization client.
@@ -33,12 +34,24 @@ The M1 baseline contains governance and validation only. It intentionally does n
 
 ## Repository validation
 
-Run the code-neutral baseline locally:
+Run the repository baseline locally:
 
 ```bash
 python scripts/check_repository_baseline.py --repository TestPapers-Mobile
 ```
 
-The `Repository baseline` GitHub check runs for pull requests and pushes to `main`. Application-specific checks will be added by their owning Linear issues.
+The generated client is pinned to the repository-local `contracts/openapi.json`, OpenAPI Generator 7.24.0 with the `dart-dio` generator, and Dart 3.12.2. The lock records the source commit and all relevant checksums; generation never reads another repository checkout.
+
+```bash
+python scripts/regenerate_cloud_api.py
+python scripts/check_cloud_api_drift.py
+cd packages/cloud_api
+dart pub get --enforce-lockfile
+dart format --output=none --set-exit-if-changed lib test
+dart analyze
+dart test
+```
+
+The `Repository baseline` and `Cloud API Contract` GitHub checks run for pull requests and pushes to `main`. Flutter application scaffolding and application-specific checks remain owned by their later Linear issues.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the change workflow and [SECURITY.md](SECURITY.md) for vulnerability reporting.
