@@ -54,4 +54,15 @@ dart test
 
 The `Repository baseline` and `Cloud API Contract` GitHub checks run for pull requests and pushes to `main`. Flutter application scaffolding and application-specific checks remain owned by their later Linear issues.
 
+## Environment and toolchain
+
+Copy `.env.example` to an ignored `.env` when preparing the future Mobile application. The current code-neutral contract covers all five platform profiles and mock/local/staging/production Cloud API selection without credentials. The Flutter application runtime is deferred to CLE-35; Python is used only by repository-validation tooling.
+
+```bash
+python scripts/check_environment_contract.py
+python -m unittest tests/test_environment_contract.py
+```
+
+See [docs/environment.md](docs/environment.md) for profile semantics and the four-repository toolchain matrix.
+
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the change workflow and [SECURITY.md](SECURITY.md) for vulnerability reporting.
