@@ -1,0 +1,6 @@
+name: invalid_baseline_probe
+publish_to: none
+
+dependencies:
+  invalid_cross_repository_source:
+    path: ../TestPapers/
