@@ -42,7 +42,7 @@ abstract class UserEntity implements Built<UserEntity, UserEntityBuilder> {
 
   @BuiltValueField(wireName: r'permissions')
   BuiltList<UserEntityPermissionsEnum> get permissions;
-  // enum permissionsEnum {  questions:read,  questions:write,  questions:delete,  answers:read,  papers:read,  papers:write,  users:manage,  };
+  // enum permissionsEnum {  questions:read,  questions:write,  questions:delete,  answers:read,  papers:read,  papers:write,  users:manage,  banks:read,  banks:write,  banks:delete,  banks:publish,  banks:subscribe,  };
 
   @BuiltValueField(wireName: r'publicId')
   String get publicId;
@@ -281,6 +281,21 @@ class UserEntityPermissionsEnum extends EnumClass {
   @BuiltValueEnumConst(wireName: r'users:manage')
   static const UserEntityPermissionsEnum usersColonManage =
       _$userEntityPermissionsEnum_usersColonManage;
+  @BuiltValueEnumConst(wireName: r'banks:read')
+  static const UserEntityPermissionsEnum banksColonRead =
+      _$userEntityPermissionsEnum_banksColonRead;
+  @BuiltValueEnumConst(wireName: r'banks:write')
+  static const UserEntityPermissionsEnum banksColonWrite =
+      _$userEntityPermissionsEnum_banksColonWrite;
+  @BuiltValueEnumConst(wireName: r'banks:delete')
+  static const UserEntityPermissionsEnum banksColonDelete =
+      _$userEntityPermissionsEnum_banksColonDelete;
+  @BuiltValueEnumConst(wireName: r'banks:publish')
+  static const UserEntityPermissionsEnum banksColonPublish =
+      _$userEntityPermissionsEnum_banksColonPublish;
+  @BuiltValueEnumConst(wireName: r'banks:subscribe')
+  static const UserEntityPermissionsEnum banksColonSubscribe =
+      _$userEntityPermissionsEnum_banksColonSubscribe;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
   static const UserEntityPermissionsEnum unknownDefaultOpenApi =
       _$userEntityPermissionsEnum_unknownDefaultOpenApi;

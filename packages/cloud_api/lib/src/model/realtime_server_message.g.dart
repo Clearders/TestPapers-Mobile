@@ -7,8 +7,9 @@ part of 'realtime_server_message.dart';
 // **************************************************************************
 
 const RealtimeServerMessageEventEnum
-    _$realtimeServerMessageEventEnum_draftPeriodDeleted =
-    const RealtimeServerMessageEventEnum._('draftPeriodDeleted');
+    _$realtimeServerMessageEventEnum_draftPeriodCollaboratorsPeriodUpdated =
+    const RealtimeServerMessageEventEnum._(
+        'draftPeriodCollaboratorsPeriodUpdated');
 const RealtimeServerMessageEventEnum
     _$realtimeServerMessageEventEnum_unknownDefaultOpenApi =
     const RealtimeServerMessageEventEnum._('unknownDefaultOpenApi');
@@ -16,8 +17,8 @@ const RealtimeServerMessageEventEnum
 RealtimeServerMessageEventEnum _$realtimeServerMessageEventEnumValueOf(
     String name) {
   switch (name) {
-    case 'draftPeriodDeleted':
-      return _$realtimeServerMessageEventEnum_draftPeriodDeleted;
+    case 'draftPeriodCollaboratorsPeriodUpdated':
+      return _$realtimeServerMessageEventEnum_draftPeriodCollaboratorsPeriodUpdated;
     case 'unknownDefaultOpenApi':
       return _$realtimeServerMessageEventEnum_unknownDefaultOpenApi;
     default:
@@ -28,7 +29,7 @@ RealtimeServerMessageEventEnum _$realtimeServerMessageEventEnumValueOf(
 final BuiltSet<RealtimeServerMessageEventEnum>
     _$realtimeServerMessageEventEnumValues = BuiltSet<
         RealtimeServerMessageEventEnum>(const <RealtimeServerMessageEventEnum>[
-  _$realtimeServerMessageEventEnum_draftPeriodDeleted,
+  _$realtimeServerMessageEventEnum_draftPeriodCollaboratorsPeriodUpdated,
   _$realtimeServerMessageEventEnum_unknownDefaultOpenApi,
 ]);
 
@@ -39,11 +40,11 @@ Serializer<RealtimeServerMessageEventEnum>
 class _$RealtimeServerMessageEventEnumSerializer
     implements PrimitiveSerializer<RealtimeServerMessageEventEnum> {
   static const Map<String, Object> _toWire = const <String, Object>{
-    'draftPeriodDeleted': 'draft.deleted',
+    'draftPeriodCollaboratorsPeriodUpdated': 'draft.collaborators.updated',
     'unknownDefaultOpenApi': 'unknown_default_open_api',
   };
   static const Map<Object, String> _fromWire = const <Object, String>{
-    'draft.deleted': 'draftPeriodDeleted',
+    'draft.collaborators.updated': 'draftPeriodCollaboratorsPeriodUpdated',
     'unknown_default_open_api': 'unknownDefaultOpenApi',
   };
 

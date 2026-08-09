@@ -63,12 +63,21 @@ class _$PongEvent extends PongEvent {
   @override
   final PongEventEventEnum event;
   @override
+  final String? eventId;
+  @override
+  final DateTime? occurredAt;
+  @override
   final PongPayload payload;
 
   factory _$PongEvent([void Function(PongEventBuilder)? updates]) =>
       (PongEventBuilder()..update(updates))._build();
 
-  _$PongEvent._({required this.event, required this.payload}) : super._();
+  _$PongEvent._(
+      {required this.event,
+      this.eventId,
+      this.occurredAt,
+      required this.payload})
+      : super._();
   @override
   PongEvent rebuild(void Function(PongEventBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -81,6 +90,8 @@ class _$PongEvent extends PongEvent {
     if (identical(other, this)) return true;
     return other is PongEvent &&
         event == other.event &&
+        eventId == other.eventId &&
+        occurredAt == other.occurredAt &&
         payload == other.payload;
   }
 
@@ -88,6 +99,8 @@ class _$PongEvent extends PongEvent {
   int get hashCode {
     var _$hash = 0;
     _$hash = $jc(_$hash, event.hashCode);
+    _$hash = $jc(_$hash, eventId.hashCode);
+    _$hash = $jc(_$hash, occurredAt.hashCode);
     _$hash = $jc(_$hash, payload.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -97,6 +110,8 @@ class _$PongEvent extends PongEvent {
   String toString() {
     return (newBuiltValueToStringHelper(r'PongEvent')
           ..add('event', event)
+          ..add('eventId', eventId)
+          ..add('occurredAt', occurredAt)
           ..add('payload', payload))
         .toString();
   }
@@ -108,6 +123,14 @@ class PongEventBuilder implements Builder<PongEvent, PongEventBuilder> {
   PongEventEventEnum? _event;
   PongEventEventEnum? get event => _$this._event;
   set event(PongEventEventEnum? event) => _$this._event = event;
+
+  String? _eventId;
+  String? get eventId => _$this._eventId;
+  set eventId(String? eventId) => _$this._eventId = eventId;
+
+  DateTime? _occurredAt;
+  DateTime? get occurredAt => _$this._occurredAt;
+  set occurredAt(DateTime? occurredAt) => _$this._occurredAt = occurredAt;
 
   PongPayloadBuilder? _payload;
   PongPayloadBuilder get payload => _$this._payload ??= PongPayloadBuilder();
@@ -121,6 +144,8 @@ class PongEventBuilder implements Builder<PongEvent, PongEventBuilder> {
     final $v = _$v;
     if ($v != null) {
       _event = $v.event;
+      _eventId = $v.eventId;
+      _occurredAt = $v.occurredAt;
       _payload = $v.payload.toBuilder();
       _$v = null;
     }
@@ -147,6 +172,8 @@ class PongEventBuilder implements Builder<PongEvent, PongEventBuilder> {
           _$PongEvent._(
             event: BuiltValueNullFieldError.checkNotNull(
                 event, r'PongEvent', 'event'),
+            eventId: eventId,
+            occurredAt: occurredAt,
             payload: payload.build(),
           );
     } catch (_) {

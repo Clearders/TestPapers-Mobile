@@ -22,6 +22,17 @@ const UserEntityPermissionsEnum _$userEntityPermissionsEnum_papersColonWrite =
     const UserEntityPermissionsEnum._('papersColonWrite');
 const UserEntityPermissionsEnum _$userEntityPermissionsEnum_usersColonManage =
     const UserEntityPermissionsEnum._('usersColonManage');
+const UserEntityPermissionsEnum _$userEntityPermissionsEnum_banksColonRead =
+    const UserEntityPermissionsEnum._('banksColonRead');
+const UserEntityPermissionsEnum _$userEntityPermissionsEnum_banksColonWrite =
+    const UserEntityPermissionsEnum._('banksColonWrite');
+const UserEntityPermissionsEnum _$userEntityPermissionsEnum_banksColonDelete =
+    const UserEntityPermissionsEnum._('banksColonDelete');
+const UserEntityPermissionsEnum _$userEntityPermissionsEnum_banksColonPublish =
+    const UserEntityPermissionsEnum._('banksColonPublish');
+const UserEntityPermissionsEnum
+    _$userEntityPermissionsEnum_banksColonSubscribe =
+    const UserEntityPermissionsEnum._('banksColonSubscribe');
 const UserEntityPermissionsEnum
     _$userEntityPermissionsEnum_unknownDefaultOpenApi =
     const UserEntityPermissionsEnum._('unknownDefaultOpenApi');
@@ -42,6 +53,16 @@ UserEntityPermissionsEnum _$userEntityPermissionsEnumValueOf(String name) {
       return _$userEntityPermissionsEnum_papersColonWrite;
     case 'usersColonManage':
       return _$userEntityPermissionsEnum_usersColonManage;
+    case 'banksColonRead':
+      return _$userEntityPermissionsEnum_banksColonRead;
+    case 'banksColonWrite':
+      return _$userEntityPermissionsEnum_banksColonWrite;
+    case 'banksColonDelete':
+      return _$userEntityPermissionsEnum_banksColonDelete;
+    case 'banksColonPublish':
+      return _$userEntityPermissionsEnum_banksColonPublish;
+    case 'banksColonSubscribe':
+      return _$userEntityPermissionsEnum_banksColonSubscribe;
     case 'unknownDefaultOpenApi':
       return _$userEntityPermissionsEnum_unknownDefaultOpenApi;
     default:
@@ -58,6 +79,11 @@ final BuiltSet<UserEntityPermissionsEnum> _$userEntityPermissionsEnumValues =
   _$userEntityPermissionsEnum_papersColonRead,
   _$userEntityPermissionsEnum_papersColonWrite,
   _$userEntityPermissionsEnum_usersColonManage,
+  _$userEntityPermissionsEnum_banksColonRead,
+  _$userEntityPermissionsEnum_banksColonWrite,
+  _$userEntityPermissionsEnum_banksColonDelete,
+  _$userEntityPermissionsEnum_banksColonPublish,
+  _$userEntityPermissionsEnum_banksColonSubscribe,
   _$userEntityPermissionsEnum_unknownDefaultOpenApi,
 ]);
 
@@ -74,6 +100,11 @@ class _$UserEntityPermissionsEnumSerializer
     'papersColonRead': 'papers:read',
     'papersColonWrite': 'papers:write',
     'usersColonManage': 'users:manage',
+    'banksColonRead': 'banks:read',
+    'banksColonWrite': 'banks:write',
+    'banksColonDelete': 'banks:delete',
+    'banksColonPublish': 'banks:publish',
+    'banksColonSubscribe': 'banks:subscribe',
     'unknownDefaultOpenApi': 'unknown_default_open_api',
   };
   static const Map<Object, String> _fromWire = const <Object, String>{
@@ -84,6 +115,11 @@ class _$UserEntityPermissionsEnumSerializer
     'papers:read': 'papersColonRead',
     'papers:write': 'papersColonWrite',
     'users:manage': 'usersColonManage',
+    'banks:read': 'banksColonRead',
+    'banks:write': 'banksColonWrite',
+    'banks:delete': 'banksColonDelete',
+    'banks:publish': 'banksColonPublish',
+    'banks:subscribe': 'banksColonSubscribe',
     'unknown_default_open_api': 'unknownDefaultOpenApi',
   };
 

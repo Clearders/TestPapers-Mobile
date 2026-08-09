@@ -74,13 +74,21 @@ class _$PaperChangedEvent extends PaperChangedEvent {
   @override
   final PaperChangedEventEventEnum event;
   @override
+  final String? eventId;
+  @override
+  final DateTime? occurredAt;
+  @override
   final PaperChangedPayload payload;
 
   factory _$PaperChangedEvent(
           [void Function(PaperChangedEventBuilder)? updates]) =>
       (PaperChangedEventBuilder()..update(updates))._build();
 
-  _$PaperChangedEvent._({required this.event, required this.payload})
+  _$PaperChangedEvent._(
+      {required this.event,
+      this.eventId,
+      this.occurredAt,
+      required this.payload})
       : super._();
   @override
   PaperChangedEvent rebuild(void Function(PaperChangedEventBuilder) updates) =>
@@ -95,6 +103,8 @@ class _$PaperChangedEvent extends PaperChangedEvent {
     if (identical(other, this)) return true;
     return other is PaperChangedEvent &&
         event == other.event &&
+        eventId == other.eventId &&
+        occurredAt == other.occurredAt &&
         payload == other.payload;
   }
 
@@ -102,6 +112,8 @@ class _$PaperChangedEvent extends PaperChangedEvent {
   int get hashCode {
     var _$hash = 0;
     _$hash = $jc(_$hash, event.hashCode);
+    _$hash = $jc(_$hash, eventId.hashCode);
+    _$hash = $jc(_$hash, occurredAt.hashCode);
     _$hash = $jc(_$hash, payload.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -111,6 +123,8 @@ class _$PaperChangedEvent extends PaperChangedEvent {
   String toString() {
     return (newBuiltValueToStringHelper(r'PaperChangedEvent')
           ..add('event', event)
+          ..add('eventId', eventId)
+          ..add('occurredAt', occurredAt)
           ..add('payload', payload))
         .toString();
   }
@@ -123,6 +137,14 @@ class PaperChangedEventBuilder
   PaperChangedEventEventEnum? _event;
   PaperChangedEventEventEnum? get event => _$this._event;
   set event(PaperChangedEventEventEnum? event) => _$this._event = event;
+
+  String? _eventId;
+  String? get eventId => _$this._eventId;
+  set eventId(String? eventId) => _$this._eventId = eventId;
+
+  DateTime? _occurredAt;
+  DateTime? get occurredAt => _$this._occurredAt;
+  set occurredAt(DateTime? occurredAt) => _$this._occurredAt = occurredAt;
 
   PaperChangedPayloadBuilder? _payload;
   PaperChangedPayloadBuilder get payload =>
@@ -137,6 +159,8 @@ class PaperChangedEventBuilder
     final $v = _$v;
     if ($v != null) {
       _event = $v.event;
+      _eventId = $v.eventId;
+      _occurredAt = $v.occurredAt;
       _payload = $v.payload.toBuilder();
       _$v = null;
     }
@@ -163,6 +187,8 @@ class PaperChangedEventBuilder
           _$PaperChangedEvent._(
             event: BuiltValueNullFieldError.checkNotNull(
                 event, r'PaperChangedEvent', 'event'),
+            eventId: eventId,
+            occurredAt: occurredAt,
             payload: payload.build(),
           );
     } catch (_) {

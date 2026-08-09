@@ -14,6 +14,8 @@ part 'paper_changed_event.g.dart';
 ///
 /// Properties:
 /// * [event]
+/// * [eventId]
+/// * [occurredAt]
 /// * [payload]
 @BuiltValue()
 abstract class PaperChangedEvent
@@ -21,6 +23,12 @@ abstract class PaperChangedEvent
   @BuiltValueField(wireName: r'event')
   PaperChangedEventEventEnum get event;
   // enum eventEnum {  paper.created,  paper.updated,  };
+
+  @BuiltValueField(wireName: r'eventId')
+  String? get eventId;
+
+  @BuiltValueField(wireName: r'occurredAt')
+  DateTime? get occurredAt;
 
   @BuiltValueField(wireName: r'payload')
   PaperChangedPayload get payload;
@@ -56,6 +64,20 @@ class _$PaperChangedEventSerializer
       object.event,
       specifiedType: const FullType(PaperChangedEventEventEnum),
     );
+    if (object.eventId != null) {
+      yield r'eventId';
+      yield serializers.serialize(
+        object.eventId,
+        specifiedType: const FullType(String),
+      );
+    }
+    if (object.occurredAt != null) {
+      yield r'occurredAt';
+      yield serializers.serialize(
+        object.occurredAt,
+        specifiedType: const FullType(DateTime),
+      );
+    }
     yield r'payload';
     yield serializers.serialize(
       object.payload,
@@ -92,6 +114,22 @@ class _$PaperChangedEventSerializer
             specifiedType: const FullType(PaperChangedEventEventEnum),
           ) as PaperChangedEventEventEnum;
           result.event = valueDes;
+          break;
+        case r'eventId':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(String),
+          ) as String?;
+          if (valueDes == null) continue;
+          result.eventId = valueDes;
+          break;
+        case r'occurredAt':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(DateTime),
+          ) as DateTime?;
+          if (valueDes == null) continue;
+          result.occurredAt = valueDes;
           break;
         case r'payload':
           final valueDes = serializers.deserialize(

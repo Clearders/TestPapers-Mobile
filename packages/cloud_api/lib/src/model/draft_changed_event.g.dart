@@ -90,13 +90,21 @@ class _$DraftChangedEvent extends DraftChangedEvent {
   @override
   final DraftChangedEventEventEnum event;
   @override
+  final String? eventId;
+  @override
+  final DateTime? occurredAt;
+  @override
   final DraftChangedPayload payload;
 
   factory _$DraftChangedEvent(
           [void Function(DraftChangedEventBuilder)? updates]) =>
       (DraftChangedEventBuilder()..update(updates))._build();
 
-  _$DraftChangedEvent._({required this.event, required this.payload})
+  _$DraftChangedEvent._(
+      {required this.event,
+      this.eventId,
+      this.occurredAt,
+      required this.payload})
       : super._();
   @override
   DraftChangedEvent rebuild(void Function(DraftChangedEventBuilder) updates) =>
@@ -111,6 +119,8 @@ class _$DraftChangedEvent extends DraftChangedEvent {
     if (identical(other, this)) return true;
     return other is DraftChangedEvent &&
         event == other.event &&
+        eventId == other.eventId &&
+        occurredAt == other.occurredAt &&
         payload == other.payload;
   }
 
@@ -118,6 +128,8 @@ class _$DraftChangedEvent extends DraftChangedEvent {
   int get hashCode {
     var _$hash = 0;
     _$hash = $jc(_$hash, event.hashCode);
+    _$hash = $jc(_$hash, eventId.hashCode);
+    _$hash = $jc(_$hash, occurredAt.hashCode);
     _$hash = $jc(_$hash, payload.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -127,6 +139,8 @@ class _$DraftChangedEvent extends DraftChangedEvent {
   String toString() {
     return (newBuiltValueToStringHelper(r'DraftChangedEvent')
           ..add('event', event)
+          ..add('eventId', eventId)
+          ..add('occurredAt', occurredAt)
           ..add('payload', payload))
         .toString();
   }
@@ -139,6 +153,14 @@ class DraftChangedEventBuilder
   DraftChangedEventEventEnum? _event;
   DraftChangedEventEventEnum? get event => _$this._event;
   set event(DraftChangedEventEventEnum? event) => _$this._event = event;
+
+  String? _eventId;
+  String? get eventId => _$this._eventId;
+  set eventId(String? eventId) => _$this._eventId = eventId;
+
+  DateTime? _occurredAt;
+  DateTime? get occurredAt => _$this._occurredAt;
+  set occurredAt(DateTime? occurredAt) => _$this._occurredAt = occurredAt;
 
   DraftChangedPayloadBuilder? _payload;
   DraftChangedPayloadBuilder get payload =>
@@ -153,6 +175,8 @@ class DraftChangedEventBuilder
     final $v = _$v;
     if ($v != null) {
       _event = $v.event;
+      _eventId = $v.eventId;
+      _occurredAt = $v.occurredAt;
       _payload = $v.payload.toBuilder();
       _$v = null;
     }
@@ -179,6 +203,8 @@ class DraftChangedEventBuilder
           _$DraftChangedEvent._(
             event: BuiltValueNullFieldError.checkNotNull(
                 event, r'DraftChangedEvent', 'event'),
+            eventId: eventId,
+            occurredAt: occurredAt,
             payload: payload.build(),
           );
     } catch (_) {

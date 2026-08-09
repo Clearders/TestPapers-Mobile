@@ -24,6 +24,8 @@ The CLE-14 baseline adds a standalone generated Dart/Dio contract package at `pa
 
 [CLE-35](https://linear.app/clearders/issue/CLE-35) will generate the Flutter Android/iOS shell and secure authentication in this existing repository. [CLE-36](https://linear.app/clearders/issue/CLE-36) will add the SQLite cache and synchronization client.
 
+The v1.1 generated package validates the hardened native token and refresh API contract only. It does not claim a shipping authentication runtime or token persistence implementation: operating-system secure storage and application-level refresh handling remain acceptance criteria for CLE-35.
+
 ## Dependency rules
 
 - Do not add source-level relative-path dependencies on `TestPapers`, `TestPaper-backend`, or `TestPapers-Desktop`.

@@ -271,6 +271,7 @@ class PapersApi {
   ///
   /// Parameters:
   /// * [paperDraftDownloadRequest]
+  /// * [format]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -282,6 +283,7 @@ class PapersApi {
   /// Throws [DioException] if API call or serialization fails
   Future<Response<Uint8List>> downloadDraftPaper({
     required PaperDraftDownloadRequest paperDraftDownloadRequest,
+    String? format = 'docx',
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -322,6 +324,12 @@ class PapersApi {
       validateStatus: validateStatus,
     );
 
+    final _queryParameters = <String, dynamic>{
+      if (format != null)
+        r'format':
+            encodeQueryParameter(_serializers, format, const FullType(String)),
+    };
+
     dynamic _bodyData;
 
     try {
@@ -333,6 +341,7 @@ class PapersApi {
         requestOptions: _options.compose(
           _dio.options,
           _path,
+          queryParameters: _queryParameters,
         ),
         type: DioExceptionType.unknown,
         error: error,
@@ -344,6 +353,7 @@ class PapersApi {
       _path,
       data: _bodyData,
       options: _options,
+      queryParameters: _queryParameters,
       cancelToken: cancelToken,
       onSendProgress: onSendProgress,
       onReceiveProgress: onReceiveProgress,
