@@ -70,13 +70,21 @@ class _$QuestionDeletedEvent extends QuestionDeletedEvent {
   @override
   final QuestionDeletedEventEventEnum event;
   @override
+  final String? eventId;
+  @override
+  final DateTime? occurredAt;
+  @override
   final QuestionDeletedPayload payload;
 
   factory _$QuestionDeletedEvent(
           [void Function(QuestionDeletedEventBuilder)? updates]) =>
       (QuestionDeletedEventBuilder()..update(updates))._build();
 
-  _$QuestionDeletedEvent._({required this.event, required this.payload})
+  _$QuestionDeletedEvent._(
+      {required this.event,
+      this.eventId,
+      this.occurredAt,
+      required this.payload})
       : super._();
   @override
   QuestionDeletedEvent rebuild(
@@ -92,6 +100,8 @@ class _$QuestionDeletedEvent extends QuestionDeletedEvent {
     if (identical(other, this)) return true;
     return other is QuestionDeletedEvent &&
         event == other.event &&
+        eventId == other.eventId &&
+        occurredAt == other.occurredAt &&
         payload == other.payload;
   }
 
@@ -99,6 +109,8 @@ class _$QuestionDeletedEvent extends QuestionDeletedEvent {
   int get hashCode {
     var _$hash = 0;
     _$hash = $jc(_$hash, event.hashCode);
+    _$hash = $jc(_$hash, eventId.hashCode);
+    _$hash = $jc(_$hash, occurredAt.hashCode);
     _$hash = $jc(_$hash, payload.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -108,6 +120,8 @@ class _$QuestionDeletedEvent extends QuestionDeletedEvent {
   String toString() {
     return (newBuiltValueToStringHelper(r'QuestionDeletedEvent')
           ..add('event', event)
+          ..add('eventId', eventId)
+          ..add('occurredAt', occurredAt)
           ..add('payload', payload))
         .toString();
   }
@@ -120,6 +134,14 @@ class QuestionDeletedEventBuilder
   QuestionDeletedEventEventEnum? _event;
   QuestionDeletedEventEventEnum? get event => _$this._event;
   set event(QuestionDeletedEventEventEnum? event) => _$this._event = event;
+
+  String? _eventId;
+  String? get eventId => _$this._eventId;
+  set eventId(String? eventId) => _$this._eventId = eventId;
+
+  DateTime? _occurredAt;
+  DateTime? get occurredAt => _$this._occurredAt;
+  set occurredAt(DateTime? occurredAt) => _$this._occurredAt = occurredAt;
 
   QuestionDeletedPayloadBuilder? _payload;
   QuestionDeletedPayloadBuilder get payload =>
@@ -135,6 +157,8 @@ class QuestionDeletedEventBuilder
     final $v = _$v;
     if ($v != null) {
       _event = $v.event;
+      _eventId = $v.eventId;
+      _occurredAt = $v.occurredAt;
       _payload = $v.payload.toBuilder();
       _$v = null;
     }
@@ -161,6 +185,8 @@ class QuestionDeletedEventBuilder
           _$QuestionDeletedEvent._(
             event: BuiltValueNullFieldError.checkNotNull(
                 event, r'QuestionDeletedEvent', 'event'),
+            eventId: eventId,
+            occurredAt: occurredAt,
             payload: payload.build(),
           );
     } catch (_) {

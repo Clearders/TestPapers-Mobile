@@ -19,9 +19,9 @@ LOCK_PATH = ROOT / "contracts" / "contract.lock.json"
 GENERATED_MANIFEST = Path(".openapi-generator/CONTRACT_FILES")
 IGNORED_BUILD_PARTS = {".dart_tool", ".pub", "build"}
 IGNORED_BUILD_FILES = {".buildlog", ".packages"}
-EXPECTED_ENUM_DEFAULTS = 4
-EXPECTED_BOOLEAN_DEFAULTS = 17
-EXPECTED_BOOLEAN_WIRE_MAPPINGS = 34
+EXPECTED_ENUM_DEFAULTS = 5
+EXPECTED_BOOLEAN_DEFAULTS = 27
+EXPECTED_BOOLEAN_WIRE_MAPPINGS = 54
 ENUM_DEFAULT = re.compile(
     r"^(?P<indent>\s*)(?P<type>[A-Z][A-Za-z0-9_]*)\?\s+"
     r"(?P<name>[A-Za-z_][A-Za-z0-9_]*)\s*=\s*"

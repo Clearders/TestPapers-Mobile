@@ -66,13 +66,21 @@ class _$DraftDeletedEvent extends DraftDeletedEvent {
   @override
   final DraftDeletedEventEventEnum event;
   @override
+  final String? eventId;
+  @override
+  final DateTime? occurredAt;
+  @override
   final DraftDeletedPayload payload;
 
   factory _$DraftDeletedEvent(
           [void Function(DraftDeletedEventBuilder)? updates]) =>
       (DraftDeletedEventBuilder()..update(updates))._build();
 
-  _$DraftDeletedEvent._({required this.event, required this.payload})
+  _$DraftDeletedEvent._(
+      {required this.event,
+      this.eventId,
+      this.occurredAt,
+      required this.payload})
       : super._();
   @override
   DraftDeletedEvent rebuild(void Function(DraftDeletedEventBuilder) updates) =>
@@ -87,6 +95,8 @@ class _$DraftDeletedEvent extends DraftDeletedEvent {
     if (identical(other, this)) return true;
     return other is DraftDeletedEvent &&
         event == other.event &&
+        eventId == other.eventId &&
+        occurredAt == other.occurredAt &&
         payload == other.payload;
   }
 
@@ -94,6 +104,8 @@ class _$DraftDeletedEvent extends DraftDeletedEvent {
   int get hashCode {
     var _$hash = 0;
     _$hash = $jc(_$hash, event.hashCode);
+    _$hash = $jc(_$hash, eventId.hashCode);
+    _$hash = $jc(_$hash, occurredAt.hashCode);
     _$hash = $jc(_$hash, payload.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -103,6 +115,8 @@ class _$DraftDeletedEvent extends DraftDeletedEvent {
   String toString() {
     return (newBuiltValueToStringHelper(r'DraftDeletedEvent')
           ..add('event', event)
+          ..add('eventId', eventId)
+          ..add('occurredAt', occurredAt)
           ..add('payload', payload))
         .toString();
   }
@@ -115,6 +129,14 @@ class DraftDeletedEventBuilder
   DraftDeletedEventEventEnum? _event;
   DraftDeletedEventEventEnum? get event => _$this._event;
   set event(DraftDeletedEventEventEnum? event) => _$this._event = event;
+
+  String? _eventId;
+  String? get eventId => _$this._eventId;
+  set eventId(String? eventId) => _$this._eventId = eventId;
+
+  DateTime? _occurredAt;
+  DateTime? get occurredAt => _$this._occurredAt;
+  set occurredAt(DateTime? occurredAt) => _$this._occurredAt = occurredAt;
 
   DraftDeletedPayloadBuilder? _payload;
   DraftDeletedPayloadBuilder get payload =>
@@ -129,6 +151,8 @@ class DraftDeletedEventBuilder
     final $v = _$v;
     if ($v != null) {
       _event = $v.event;
+      _eventId = $v.eventId;
+      _occurredAt = $v.occurredAt;
       _payload = $v.payload.toBuilder();
       _$v = null;
     }
@@ -155,6 +179,8 @@ class DraftDeletedEventBuilder
           _$DraftDeletedEvent._(
             event: BuiltValueNullFieldError.checkNotNull(
                 event, r'DraftDeletedEvent', 'event'),
+            eventId: eventId,
+            occurredAt: occurredAt,
             payload: payload.build(),
           );
     } catch (_) {

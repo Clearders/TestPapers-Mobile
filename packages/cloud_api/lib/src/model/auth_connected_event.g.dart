@@ -68,13 +68,21 @@ class _$AuthConnectedEvent extends AuthConnectedEvent {
   @override
   final AuthConnectedEventEventEnum event;
   @override
+  final String? eventId;
+  @override
+  final DateTime? occurredAt;
+  @override
   final AuthConnectedPayload payload;
 
   factory _$AuthConnectedEvent(
           [void Function(AuthConnectedEventBuilder)? updates]) =>
       (AuthConnectedEventBuilder()..update(updates))._build();
 
-  _$AuthConnectedEvent._({required this.event, required this.payload})
+  _$AuthConnectedEvent._(
+      {required this.event,
+      this.eventId,
+      this.occurredAt,
+      required this.payload})
       : super._();
   @override
   AuthConnectedEvent rebuild(
@@ -90,6 +98,8 @@ class _$AuthConnectedEvent extends AuthConnectedEvent {
     if (identical(other, this)) return true;
     return other is AuthConnectedEvent &&
         event == other.event &&
+        eventId == other.eventId &&
+        occurredAt == other.occurredAt &&
         payload == other.payload;
   }
 
@@ -97,6 +107,8 @@ class _$AuthConnectedEvent extends AuthConnectedEvent {
   int get hashCode {
     var _$hash = 0;
     _$hash = $jc(_$hash, event.hashCode);
+    _$hash = $jc(_$hash, eventId.hashCode);
+    _$hash = $jc(_$hash, occurredAt.hashCode);
     _$hash = $jc(_$hash, payload.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -106,6 +118,8 @@ class _$AuthConnectedEvent extends AuthConnectedEvent {
   String toString() {
     return (newBuiltValueToStringHelper(r'AuthConnectedEvent')
           ..add('event', event)
+          ..add('eventId', eventId)
+          ..add('occurredAt', occurredAt)
           ..add('payload', payload))
         .toString();
   }
@@ -118,6 +132,14 @@ class AuthConnectedEventBuilder
   AuthConnectedEventEventEnum? _event;
   AuthConnectedEventEventEnum? get event => _$this._event;
   set event(AuthConnectedEventEventEnum? event) => _$this._event = event;
+
+  String? _eventId;
+  String? get eventId => _$this._eventId;
+  set eventId(String? eventId) => _$this._eventId = eventId;
+
+  DateTime? _occurredAt;
+  DateTime? get occurredAt => _$this._occurredAt;
+  set occurredAt(DateTime? occurredAt) => _$this._occurredAt = occurredAt;
 
   AuthConnectedPayloadBuilder? _payload;
   AuthConnectedPayloadBuilder get payload =>
@@ -133,6 +155,8 @@ class AuthConnectedEventBuilder
     final $v = _$v;
     if ($v != null) {
       _event = $v.event;
+      _eventId = $v.eventId;
+      _occurredAt = $v.occurredAt;
       _payload = $v.payload.toBuilder();
       _$v = null;
     }
@@ -159,6 +183,8 @@ class AuthConnectedEventBuilder
           _$AuthConnectedEvent._(
             event: BuiltValueNullFieldError.checkNotNull(
                 event, r'AuthConnectedEvent', 'event'),
+            eventId: eventId,
+            occurredAt: occurredAt,
             payload: payload.build(),
           );
     } catch (_) {

@@ -14,6 +14,8 @@ part 'question_changed_event.g.dart';
 ///
 /// Properties:
 /// * [event]
+/// * [eventId]
+/// * [occurredAt]
 /// * [payload]
 @BuiltValue()
 abstract class QuestionChangedEvent
@@ -21,6 +23,12 @@ abstract class QuestionChangedEvent
   @BuiltValueField(wireName: r'event')
   QuestionChangedEventEventEnum get event;
   // enum eventEnum {  question.created,  question.updated,  };
+
+  @BuiltValueField(wireName: r'eventId')
+  String? get eventId;
+
+  @BuiltValueField(wireName: r'occurredAt')
+  DateTime? get occurredAt;
 
   @BuiltValueField(wireName: r'payload')
   QuestionChangedPayload get payload;
@@ -59,6 +67,20 @@ class _$QuestionChangedEventSerializer
       object.event,
       specifiedType: const FullType(QuestionChangedEventEventEnum),
     );
+    if (object.eventId != null) {
+      yield r'eventId';
+      yield serializers.serialize(
+        object.eventId,
+        specifiedType: const FullType(String),
+      );
+    }
+    if (object.occurredAt != null) {
+      yield r'occurredAt';
+      yield serializers.serialize(
+        object.occurredAt,
+        specifiedType: const FullType(DateTime),
+      );
+    }
     yield r'payload';
     yield serializers.serialize(
       object.payload,
@@ -95,6 +117,22 @@ class _$QuestionChangedEventSerializer
             specifiedType: const FullType(QuestionChangedEventEventEnum),
           ) as QuestionChangedEventEventEnum;
           result.event = valueDes;
+          break;
+        case r'eventId':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(String),
+          ) as String?;
+          if (valueDes == null) continue;
+          result.eventId = valueDes;
+          break;
+        case r'occurredAt':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(DateTime),
+          ) as DateTime?;
+          if (valueDes == null) continue;
+          result.occurredAt = valueDes;
           break;
         case r'payload':
           final valueDes = serializers.deserialize(

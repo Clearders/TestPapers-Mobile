@@ -10,12 +10,14 @@ import 'package:testpapers_cloud_api/src/auth/basic_auth.dart';
 import 'package:testpapers_cloud_api/src/auth/bearer_auth.dart';
 import 'package:testpapers_cloud_api/src/auth/oauth.dart';
 import 'package:testpapers_cloud_api/src/api/auth_api.dart';
+import 'package:testpapers_cloud_api/src/api/banks_api.dart';
 import 'package:testpapers_cloud_api/src/api/default_api.dart';
 import 'package:testpapers_cloud_api/src/api/drafts_api.dart';
 import 'package:testpapers_cloud_api/src/api/health_api.dart';
 import 'package:testpapers_cloud_api/src/api/images_api.dart';
 import 'package:testpapers_cloud_api/src/api/metadata_api.dart';
 import 'package:testpapers_cloud_api/src/api/papers_api.dart';
+import 'package:testpapers_cloud_api/src/api/public_banks_api.dart';
 import 'package:testpapers_cloud_api/src/api/questions_api.dart';
 import 'package:testpapers_cloud_api/src/api/tasks_api.dart';
 import 'package:testpapers_cloud_api/src/api/users_api.dart';
@@ -146,6 +148,12 @@ class TestpapersCloudApi {
     return AuthApi(dio, serializers);
   }
 
+  /// Get BanksApi instance, base route and serializer can be overridden by a given but be careful,
+  /// by doing that all interceptors will not be executed
+  BanksApi getBanksApi() {
+    return BanksApi(dio, serializers);
+  }
+
   /// Get DefaultApi instance, base route and serializer can be overridden by a given but be careful,
   /// by doing that all interceptors will not be executed
   DefaultApi getDefaultApi() {
@@ -180,6 +188,12 @@ class TestpapersCloudApi {
   /// by doing that all interceptors will not be executed
   PapersApi getPapersApi() {
     return PapersApi(dio, serializers);
+  }
+
+  /// Get PublicBanksApi instance, base route and serializer can be overridden by a given but be careful,
+  /// by doing that all interceptors will not be executed
+  PublicBanksApi getPublicBanksApi() {
+    return PublicBanksApi(dio, serializers);
   }
 
   /// Get QuestionsApi instance, base route and serializer can be overridden by a given but be careful,

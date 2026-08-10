@@ -13,31 +13,76 @@ Serializers _$serializers = (Serializers().toBuilder()
       ..add(AuthConnectedEventEventEnum.serializer)
       ..add(AuthConnectedPayload.serializer)
       ..add(AuthSession.serializer)
+      ..add(BankAccessRole.serializer)
+      ..add(BankCreate.serializer)
+      ..add(BankForkRequest.serializer)
+      ..add(BankItemAdd.serializer)
+      ..add(BankListScope.serializer)
+      ..add(BankMemberCreate.serializer)
+      ..add(BankMemberEntity.serializer)
+      ..add(BankMemberUpdate.serializer)
+      ..add(BankPublicationEntity.serializer)
+      ..add(BankRole.serializer)
+      ..add(BankSubscriptionEntity.serializer)
+      ..add(BankSubscriptionUpdate.serializer)
+      ..add(BankUpdate.serializer)
+      ..add(BankUserRef.serializer)
+      ..add(BankVersionSummary.serializer)
+      ..add(BankVisibility.serializer)
       ..add(CorrectionCategory.serializer)
       ..add(CorrectionStatus.serializer)
       ..add(Data.serializer)
+      ..add(DeviceSessionEntity.serializer)
       ..add(Difficulty.serializer)
       ..add(DraftAccessRole.serializer)
       ..add(DraftChangedEvent.serializer)
       ..add(DraftChangedEventEventEnum.serializer)
       ..add(DraftChangedPayload.serializer)
       ..add(DraftCollaboratorRole.serializer)
+      ..add(DraftCollaboratorsUpdatedEvent.serializer)
+      ..add(DraftCollaboratorsUpdatedEventEventEnum.serializer)
       ..add(DraftCommentStatus.serializer)
       ..add(DraftDeletedEvent.serializer)
       ..add(DraftDeletedEventEventEnum.serializer)
       ..add(DraftDeletedPayload.serializer)
+      ..add(DraftPresenceMember.serializer)
+      ..add(DraftPresenceMemberActivityEnum.serializer)
+      ..add(DraftPresenceSnapshotEvent.serializer)
+      ..add(DraftPresenceSnapshotEventEventEnum.serializer)
+      ..add(DraftPresenceSnapshotPayload.serializer)
+      ..add(DraftPresenceUpdateEvent.serializer)
+      ..add(DraftPresenceUpdateEventActivityEnum.serializer)
+      ..add(DraftPresenceUpdateEventEventEnum.serializer)
       ..add(DraftReviewStatus.serializer)
+      ..add(DraftSubscribeEvent.serializer)
+      ..add(DraftSubscribeEventEventEnum.serializer)
+      ..add(DraftUnsubscribeEvent.serializer)
+      ..add(DraftUnsubscribeEventEventEnum.serializer)
       ..add(DraftUserRef.serializer)
       ..add(EnvelopeAuthSession.serializer)
       ..add(EnvelopeAuthSessionSuccessEnum.serializer)
+      ..add(EnvelopeBankPublicationEntity.serializer)
+      ..add(EnvelopeBankPublicationEntitySuccessEnum.serializer)
+      ..add(EnvelopeBankSubscriptionEntity.serializer)
+      ..add(EnvelopeBankSubscriptionEntitySuccessEnum.serializer)
       ..add(EnvelopeDict.serializer)
       ..add(EnvelopeDictSuccessEnum.serializer)
       ..add(EnvelopeImageUploadResponse.serializer)
       ..add(EnvelopeImageUploadResponseSuccessEnum.serializer)
+      ..add(EnvelopeListBankVersionSummary.serializer)
+      ..add(EnvelopeListBankVersionSummarySuccessEnum.serializer)
+      ..add(EnvelopeListDeviceSessionEntity.serializer)
+      ..add(EnvelopeListDeviceSessionEntitySuccessEnum.serializer)
       ..add(EnvelopeListPaperDraftSummary.serializer)
       ..add(EnvelopeListPaperDraftSummarySuccessEnum.serializer)
+      ..add(EnvelopeListPublicBankSummary.serializer)
+      ..add(EnvelopeListPublicBankSummarySuccessEnum.serializer)
+      ..add(EnvelopeListQuestionBankSummary.serializer)
+      ..add(EnvelopeListQuestionBankSummarySuccessEnum.serializer)
       ..add(EnvelopeListQuestionCorrectionEntity.serializer)
       ..add(EnvelopeListQuestionCorrectionEntitySuccessEnum.serializer)
+      ..add(EnvelopeListQuestionEntity.serializer)
+      ..add(EnvelopeListQuestionEntitySuccessEnum.serializer)
       ..add(EnvelopeListQuestionRevisionEntity.serializer)
       ..add(EnvelopeListQuestionRevisionEntitySuccessEnum.serializer)
       ..add(EnvelopeListStr.serializer)
@@ -52,10 +97,16 @@ Serializers _$serializers = (Serializers().toBuilder()
       ..add(EnvelopePaperEntitySuccessEnum.serializer)
       ..add(EnvelopePaperExpandedEntity.serializer)
       ..add(EnvelopePaperExpandedEntitySuccessEnum.serializer)
+      ..add(EnvelopePublicBankDetail.serializer)
+      ..add(EnvelopePublicBankDetailSuccessEnum.serializer)
+      ..add(EnvelopeQuestionBankEntity.serializer)
+      ..add(EnvelopeQuestionBankEntitySuccessEnum.serializer)
       ..add(EnvelopeQuestionCorrectionEntity.serializer)
       ..add(EnvelopeQuestionCorrectionEntitySuccessEnum.serializer)
       ..add(EnvelopeQuestionEntity.serializer)
       ..add(EnvelopeQuestionEntitySuccessEnum.serializer)
+      ..add(EnvelopeTokenPair.serializer)
+      ..add(EnvelopeTokenPairSuccessEnum.serializer)
       ..add(EnvelopeUnionPaperExpandedEntityPaperEntity.serializer)
       ..add(EnvelopeUnionPaperExpandedEntityPaperEntitySuccessEnum.serializer)
       ..add(EnvelopeUserEntity.serializer)
@@ -76,6 +127,7 @@ Serializers _$serializers = (Serializers().toBuilder()
       ..add(LocationInner.serializer)
       ..add(LoginRequest.serializer)
       ..add(MetaInfo.serializer)
+      ..add(NativeLoginRequest.serializer)
       ..add(PaginatedResponseQuestionEntity.serializer)
       ..add(PaginationInfo.serializer)
       ..add(PaperChangedEvent.serializer)
@@ -111,6 +163,10 @@ Serializers _$serializers = (Serializers().toBuilder()
       ..add(PongEventEventEnum.serializer)
       ..add(PongPayload.serializer)
       ..add(ProfileUpdate.serializer)
+      ..add(PublicBankDetail.serializer)
+      ..add(PublicBankSummary.serializer)
+      ..add(QuestionBankEntity.serializer)
+      ..add(QuestionBankSummary.serializer)
       ..add(QuestionChangedEvent.serializer)
       ..add(QuestionChangedEventEventEnum.serializer)
       ..add(QuestionChangedPayload.serializer)
@@ -130,17 +186,34 @@ Serializers _$serializers = (Serializers().toBuilder()
       ..add(QuestionRevisionEntity.serializer)
       ..add(QuestionType.serializer)
       ..add(QuestionUpdate.serializer)
+      ..add(RealtimeClientMessage.serializer)
       ..add(RealtimePing.serializer)
       ..add(RealtimePingEventEnum.serializer)
       ..add(RealtimeServerMessage.serializer)
+      ..add(RefreshTokenRequest.serializer)
       ..add(RegisterRequest.serializer)
       ..add(SortOrder.serializer)
+      ..add(TokenPair.serializer)
       ..add(UserCreate.serializer)
       ..add(UserEntity.serializer)
       ..add(UserEntityPermissionsEnum.serializer)
       ..add(UserRole.serializer)
       ..add(UserUpdate.serializer)
       ..add(ValidationError.serializer)
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(BankMemberEntity)]),
+          () => ListBuilder<BankMemberEntity>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(BankVersionSummary)]),
+          () => ListBuilder<BankVersionSummary>())
+      ..addBuilderFactory(
+          const FullType(
+              BuiltList, const [const FullType(DeviceSessionEntity)]),
+          () => ListBuilder<DeviceSessionEntity>())
+      ..addBuilderFactory(
+          const FullType(
+              BuiltList, const [const FullType(DraftPresenceMember)]),
+          () => ListBuilder<DraftPresenceMember>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(LocationInner)]),
           () => ListBuilder<LocationInner>())
@@ -169,9 +242,19 @@ Serializers _$serializers = (Serializers().toBuilder()
               BuiltList, const [const FullType(PaperQuestionEntity)]),
           () => ListBuilder<PaperQuestionEntity>())
       ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(PublicBankSummary)]),
+          () => ListBuilder<PublicBankSummary>())
+      ..addBuilderFactory(
+          const FullType(
+              BuiltList, const [const FullType(QuestionBankSummary)]),
+          () => ListBuilder<QuestionBankSummary>())
+      ..addBuilderFactory(
           const FullType(
               BuiltList, const [const FullType(QuestionCorrectionEntity)]),
           () => ListBuilder<QuestionCorrectionEntity>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(QuestionEntity)]),
+          () => ListBuilder<QuestionEntity>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(QuestionEntity)]),
           () => ListBuilder<QuestionEntity>())
@@ -255,6 +338,9 @@ Serializers _$serializers = (Serializers().toBuilder()
           const FullType(BuiltList, const [const FullType(String)]),
           () => ListBuilder<String>())
       ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(String)]),
+          () => ListBuilder<String>())
+      ..addBuilderFactory(
           const FullType(
               BuiltList, const [const FullType(GenerationTypeTarget)]),
           () => ListBuilder<GenerationTypeTarget>())
@@ -274,6 +360,18 @@ Serializers _$serializers = (Serializers().toBuilder()
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(ValidationError)]),
           () => ListBuilder<ValidationError>())
+      ..addBuilderFactory(
+          const FullType(BuiltMap, const [
+            const FullType(String),
+            const FullType.nullable(JsonObject)
+          ]),
+          () => MapBuilder<String, JsonObject?>())
+      ..addBuilderFactory(
+          const FullType(BuiltMap, const [
+            const FullType(String),
+            const FullType.nullable(JsonObject)
+          ]),
+          () => MapBuilder<String, JsonObject?>())
       ..addBuilderFactory(
           const FullType(BuiltMap, const [
             const FullType(String),

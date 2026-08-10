@@ -455,6 +455,7 @@ class DraftsApi {
   ///
   /// Parameters:
   /// * [draftPublicId]
+  /// * [format]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -466,6 +467,7 @@ class DraftsApi {
   /// Throws [DioException] if API call or serialization fails
   Future<Response<Uint8List>> downloadDraft({
     required String draftPublicId,
+    String? format = 'docx',
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -503,9 +505,16 @@ class DraftsApi {
       validateStatus: validateStatus,
     );
 
+    final _queryParameters = <String, dynamic>{
+      if (format != null)
+        r'format':
+            encodeQueryParameter(_serializers, format, const FullType(String)),
+    };
+
     final _response = await _dio.request<Object>(
       _path,
       options: _options,
+      queryParameters: _queryParameters,
       cancelToken: cancelToken,
       onSendProgress: onSendProgress,
       onReceiveProgress: onReceiveProgress,

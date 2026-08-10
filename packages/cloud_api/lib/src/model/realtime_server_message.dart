@@ -6,15 +6,17 @@
 import 'package:testpapers_cloud_api/src/model/paper_questions_changed_event.dart';
 import 'package:testpapers_cloud_api/src/model/question_changed_event.dart';
 import 'package:testpapers_cloud_api/src/model/paper_changed_event.dart';
-import 'package:built_collection/built_collection.dart';
-import 'package:testpapers_cloud_api/src/model/paper_question_removed_event.dart';
-import 'package:testpapers_cloud_api/src/model/draft_deleted_payload.dart';
+import 'package:testpapers_cloud_api/src/model/draft_changed_payload.dart';
 import 'package:testpapers_cloud_api/src/model/error_event.dart';
 import 'package:testpapers_cloud_api/src/model/question_deleted_event.dart';
 import 'package:testpapers_cloud_api/src/model/draft_deleted_event.dart';
-import 'package:testpapers_cloud_api/src/model/pong_event.dart';
 import 'package:testpapers_cloud_api/src/model/draft_changed_event.dart';
 import 'package:testpapers_cloud_api/src/model/auth_connected_event.dart';
+import 'package:testpapers_cloud_api/src/model/draft_collaborators_updated_event.dart';
+import 'package:built_collection/built_collection.dart';
+import 'package:testpapers_cloud_api/src/model/paper_question_removed_event.dart';
+import 'package:testpapers_cloud_api/src/model/draft_presence_snapshot_event.dart';
+import 'package:testpapers_cloud_api/src/model/pong_event.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:one_of/one_of.dart';
@@ -25,20 +27,24 @@ part 'realtime_server_message.g.dart';
 ///
 /// Properties:
 /// * [event]
+/// * [eventId]
+/// * [occurredAt]
 /// * [payload]
 @BuiltValue()
 abstract class RealtimeServerMessage
     implements Built<RealtimeServerMessage, RealtimeServerMessageBuilder> {
-  /// One Of [AuthConnectedEvent], [DraftChangedEvent], [DraftDeletedEvent], [ErrorEvent], [PaperChangedEvent], [PaperQuestionRemovedEvent], [PaperQuestionsChangedEvent], [PongEvent], [QuestionChangedEvent], [QuestionDeletedEvent]
+  /// One Of [AuthConnectedEvent], [DraftChangedEvent], [DraftCollaboratorsUpdatedEvent], [DraftDeletedEvent], [DraftPresenceSnapshotEvent], [ErrorEvent], [PaperChangedEvent], [PaperQuestionRemovedEvent], [PaperQuestionsChangedEvent], [PongEvent], [QuestionChangedEvent], [QuestionDeletedEvent]
   OneOf get oneOf;
 
   static const String discriminatorFieldName = r'event';
 
   static const Map<String, Type> discriminatorMapping = {
     r'auth.connected': AuthConnectedEvent,
+    r'draft.collaborators.updated': DraftCollaboratorsUpdatedEvent,
     r'draft.comment.created': DraftChangedEvent,
     r'draft.comment.updated': DraftChangedEvent,
     r'draft.deleted': DraftDeletedEvent,
+    r'draft.presence.snapshot': DraftPresenceSnapshotEvent,
     r'draft.review.updated': DraftChangedEvent,
     r'draft.updated': DraftChangedEvent,
     r'error': ErrorEvent,
@@ -71,6 +77,9 @@ extension RealtimeServerMessageDiscriminatorExt on RealtimeServerMessage {
     if (this is AuthConnectedEvent) {
       return r'auth.connected';
     }
+    if (this is DraftCollaboratorsUpdatedEvent) {
+      return r'draft.collaborators.updated';
+    }
     if (this is DraftChangedEvent) {
       return r'draft.comment.created';
     }
@@ -79,6 +88,9 @@ extension RealtimeServerMessageDiscriminatorExt on RealtimeServerMessage {
     }
     if (this is DraftDeletedEvent) {
       return r'draft.deleted';
+    }
+    if (this is DraftPresenceSnapshotEvent) {
+      return r'draft.presence.snapshot';
     }
     if (this is DraftChangedEvent) {
       return r'draft.review.updated';
@@ -126,6 +138,9 @@ extension RealtimeServerMessageBuilderDiscriminatorExt
     if (this is AuthConnectedEventBuilder) {
       return r'auth.connected';
     }
+    if (this is DraftCollaboratorsUpdatedEventBuilder) {
+      return r'draft.collaborators.updated';
+    }
     if (this is DraftChangedEventBuilder) {
       return r'draft.comment.created';
     }
@@ -134,6 +149,9 @@ extension RealtimeServerMessageBuilderDiscriminatorExt
     }
     if (this is DraftDeletedEventBuilder) {
       return r'draft.deleted';
+    }
+    if (this is DraftPresenceSnapshotEventBuilder) {
+      return r'draft.presence.snapshot';
     }
     if (this is DraftChangedEventBuilder) {
       return r'draft.review.updated';
@@ -220,9 +238,11 @@ class _$RealtimeServerMessageSerializer
     oneOfDataSrc = serialized;
     final oneOfTypes = [
       AuthConnectedEvent,
+      DraftCollaboratorsUpdatedEvent,
       DraftChangedEvent,
       DraftChangedEvent,
       DraftDeletedEvent,
+      DraftPresenceSnapshotEvent,
       DraftChangedEvent,
       DraftChangedEvent,
       ErrorEvent,
@@ -246,6 +266,13 @@ class _$RealtimeServerMessageSerializer
         ) as AuthConnectedEvent;
         oneOfType = AuthConnectedEvent;
         break;
+      case r'draft.collaborators.updated':
+        oneOfResult = serializers.deserialize(
+          oneOfDataSrc,
+          specifiedType: FullType(DraftCollaboratorsUpdatedEvent),
+        ) as DraftCollaboratorsUpdatedEvent;
+        oneOfType = DraftCollaboratorsUpdatedEvent;
+        break;
       case r'draft.comment.created':
         oneOfResult = serializers.deserialize(
           oneOfDataSrc,
@@ -266,6 +293,13 @@ class _$RealtimeServerMessageSerializer
           specifiedType: FullType(DraftDeletedEvent),
         ) as DraftDeletedEvent;
         oneOfType = DraftDeletedEvent;
+        break;
+      case r'draft.presence.snapshot':
+        oneOfResult = serializers.deserialize(
+          oneOfDataSrc,
+          specifiedType: FullType(DraftPresenceSnapshotEvent),
+        ) as DraftPresenceSnapshotEvent;
+        oneOfType = DraftPresenceSnapshotEvent;
         break;
       case r'draft.review.updated':
         oneOfResult = serializers.deserialize(
@@ -364,9 +398,10 @@ class _$RealtimeServerMessageSerializer
 }
 
 class RealtimeServerMessageEventEnum extends EnumClass {
-  @BuiltValueEnumConst(wireName: r'draft.deleted')
-  static const RealtimeServerMessageEventEnum draftPeriodDeleted =
-      _$realtimeServerMessageEventEnum_draftPeriodDeleted;
+  @BuiltValueEnumConst(wireName: r'draft.collaborators.updated')
+  static const RealtimeServerMessageEventEnum
+      draftPeriodCollaboratorsPeriodUpdated =
+      _$realtimeServerMessageEventEnum_draftPeriodCollaboratorsPeriodUpdated;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
   static const RealtimeServerMessageEventEnum unknownDefaultOpenApi =
       _$realtimeServerMessageEventEnum_unknownDefaultOpenApi;

@@ -14,12 +14,20 @@ part 'error_event.g.dart';
 ///
 /// Properties:
 /// * [event]
+/// * [eventId]
+/// * [occurredAt]
 /// * [payload]
 @BuiltValue()
 abstract class ErrorEvent implements Built<ErrorEvent, ErrorEventBuilder> {
   @BuiltValueField(wireName: r'event')
   ErrorEventEventEnum get event;
   // enum eventEnum {  error,  };
+
+  @BuiltValueField(wireName: r'eventId')
+  String? get eventId;
+
+  @BuiltValueField(wireName: r'occurredAt')
+  DateTime? get occurredAt;
 
   @BuiltValueField(wireName: r'payload')
   ErrorPayload get payload;
@@ -52,6 +60,20 @@ class _$ErrorEventSerializer implements PrimitiveSerializer<ErrorEvent> {
       object.event,
       specifiedType: const FullType(ErrorEventEventEnum),
     );
+    if (object.eventId != null) {
+      yield r'eventId';
+      yield serializers.serialize(
+        object.eventId,
+        specifiedType: const FullType(String),
+      );
+    }
+    if (object.occurredAt != null) {
+      yield r'occurredAt';
+      yield serializers.serialize(
+        object.occurredAt,
+        specifiedType: const FullType(DateTime),
+      );
+    }
     yield r'payload';
     yield serializers.serialize(
       object.payload,
@@ -88,6 +110,22 @@ class _$ErrorEventSerializer implements PrimitiveSerializer<ErrorEvent> {
             specifiedType: const FullType(ErrorEventEventEnum),
           ) as ErrorEventEventEnum;
           result.event = valueDes;
+          break;
+        case r'eventId':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(String),
+          ) as String?;
+          if (valueDes == null) continue;
+          result.eventId = valueDes;
+          break;
+        case r'occurredAt':
+          final valueDes = serializers.deserialize(
+            value,
+            specifiedType: const FullType.nullable(DateTime),
+          ) as DateTime?;
+          if (valueDes == null) continue;
+          result.occurredAt = valueDes;
           break;
         case r'payload':
           final valueDes = serializers.deserialize(
