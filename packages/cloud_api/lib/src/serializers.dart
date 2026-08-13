@@ -16,6 +16,10 @@ import 'package:testpapers_cloud_api/src/model/date.dart';
 
 import 'package:testpapers_cloud_api/src/model/answer.dart';
 import 'package:testpapers_cloud_api/src/model/answer1.dart';
+import 'package:testpapers_cloud_api/src/model/attachment_chunk_receipt.dart';
+import 'package:testpapers_cloud_api/src/model/attachment_upload_complete_request.dart';
+import 'package:testpapers_cloud_api/src/model/attachment_upload_initiate_request.dart';
+import 'package:testpapers_cloud_api/src/model/attachment_upload_status.dart';
 import 'package:testpapers_cloud_api/src/model/auth_connected_event.dart';
 import 'package:testpapers_cloud_api/src/model/auth_connected_payload.dart';
 import 'package:testpapers_cloud_api/src/model/auth_session.dart';
@@ -56,6 +60,8 @@ import 'package:testpapers_cloud_api/src/model/draft_review_status.dart';
 import 'package:testpapers_cloud_api/src/model/draft_subscribe_event.dart';
 import 'package:testpapers_cloud_api/src/model/draft_unsubscribe_event.dart';
 import 'package:testpapers_cloud_api/src/model/draft_user_ref.dart';
+import 'package:testpapers_cloud_api/src/model/envelope_attachment_chunk_receipt.dart';
+import 'package:testpapers_cloud_api/src/model/envelope_attachment_upload_status.dart';
 import 'package:testpapers_cloud_api/src/model/envelope_auth_session.dart';
 import 'package:testpapers_cloud_api/src/model/envelope_bank_publication_entity.dart';
 import 'package:testpapers_cloud_api/src/model/envelope_bank_subscription_entity.dart';
@@ -70,6 +76,7 @@ import 'package:testpapers_cloud_api/src/model/envelope_list_question_correction
 import 'package:testpapers_cloud_api/src/model/envelope_list_question_entity.dart';
 import 'package:testpapers_cloud_api/src/model/envelope_list_question_revision_entity.dart';
 import 'package:testpapers_cloud_api/src/model/envelope_list_str.dart';
+import 'package:testpapers_cloud_api/src/model/envelope_list_sync_entity_version_record.dart';
 import 'package:testpapers_cloud_api/src/model/envelope_list_user_entity.dart';
 import 'package:testpapers_cloud_api/src/model/envelope_paginated_response_question_entity.dart';
 import 'package:testpapers_cloud_api/src/model/envelope_paper_draft_detail.dart';
@@ -79,6 +86,13 @@ import 'package:testpapers_cloud_api/src/model/envelope_public_bank_detail.dart'
 import 'package:testpapers_cloud_api/src/model/envelope_question_bank_entity.dart';
 import 'package:testpapers_cloud_api/src/model/envelope_question_correction_entity.dart';
 import 'package:testpapers_cloud_api/src/model/envelope_question_entity.dart';
+import 'package:testpapers_cloud_api/src/model/envelope_sync_ack_response.dart';
+import 'package:testpapers_cloud_api/src/model/envelope_sync_conflict_record.dart';
+import 'package:testpapers_cloud_api/src/model/envelope_sync_conflict_resolution_record.dart';
+import 'package:testpapers_cloud_api/src/model/envelope_sync_pull_response.dart';
+import 'package:testpapers_cloud_api/src/model/envelope_sync_push_response.dart';
+import 'package:testpapers_cloud_api/src/model/envelope_sync_snapshot_response.dart';
+import 'package:testpapers_cloud_api/src/model/envelope_sync_version_restore_record.dart';
 import 'package:testpapers_cloud_api/src/model/envelope_token_pair.dart';
 import 'package:testpapers_cloud_api/src/model/envelope_union_paper_expanded_entity_paper_entity.dart';
 import 'package:testpapers_cloud_api/src/model/envelope_user_entity.dart';
@@ -155,6 +169,29 @@ import 'package:testpapers_cloud_api/src/model/realtime_server_message.dart';
 import 'package:testpapers_cloud_api/src/model/refresh_token_request.dart';
 import 'package:testpapers_cloud_api/src/model/register_request.dart';
 import 'package:testpapers_cloud_api/src/model/sort_order.dart';
+import 'package:testpapers_cloud_api/src/model/sync_ack_request.dart';
+import 'package:testpapers_cloud_api/src/model/sync_ack_response.dart';
+import 'package:testpapers_cloud_api/src/model/sync_change.dart';
+import 'package:testpapers_cloud_api/src/model/sync_conflict_reason.dart';
+import 'package:testpapers_cloud_api/src/model/sync_conflict_record.dart';
+import 'package:testpapers_cloud_api/src/model/sync_conflict_resolution_record.dart';
+import 'package:testpapers_cloud_api/src/model/sync_conflict_resolution_request.dart';
+import 'package:testpapers_cloud_api/src/model/sync_conflict_snapshot.dart';
+import 'package:testpapers_cloud_api/src/model/sync_entity_type.dart';
+import 'package:testpapers_cloud_api/src/model/sync_entity_version_record.dart';
+import 'package:testpapers_cloud_api/src/model/sync_error.dart';
+import 'package:testpapers_cloud_api/src/model/sync_error_code.dart';
+import 'package:testpapers_cloud_api/src/model/sync_mutation.dart';
+import 'package:testpapers_cloud_api/src/model/sync_mutation_kind.dart';
+import 'package:testpapers_cloud_api/src/model/sync_operation_result.dart';
+import 'package:testpapers_cloud_api/src/model/sync_operation_status.dart';
+import 'package:testpapers_cloud_api/src/model/sync_pull_response.dart';
+import 'package:testpapers_cloud_api/src/model/sync_push_request.dart';
+import 'package:testpapers_cloud_api/src/model/sync_push_response.dart';
+import 'package:testpapers_cloud_api/src/model/sync_resolution_action.dart';
+import 'package:testpapers_cloud_api/src/model/sync_snapshot_response.dart';
+import 'package:testpapers_cloud_api/src/model/sync_version_restore_record.dart';
+import 'package:testpapers_cloud_api/src/model/sync_version_restore_request.dart';
 import 'package:testpapers_cloud_api/src/model/token_pair.dart';
 import 'package:testpapers_cloud_api/src/model/user_create.dart';
 import 'package:testpapers_cloud_api/src/model/user_entity.dart';
@@ -167,6 +204,10 @@ part 'serializers.g.dart';
 @SerializersFor([
   Answer,
   Answer1,
+  AttachmentChunkReceipt,
+  AttachmentUploadCompleteRequest,
+  AttachmentUploadInitiateRequest,
+  AttachmentUploadStatus,
   AuthConnectedEvent,
   AuthConnectedPayload,
   AuthSession,
@@ -207,6 +248,8 @@ part 'serializers.g.dart';
   DraftSubscribeEvent,
   DraftUnsubscribeEvent,
   DraftUserRef,
+  EnvelopeAttachmentChunkReceipt,
+  EnvelopeAttachmentUploadStatus,
   EnvelopeAuthSession,
   EnvelopeBankPublicationEntity,
   EnvelopeBankSubscriptionEntity,
@@ -221,6 +264,7 @@ part 'serializers.g.dart';
   EnvelopeListQuestionEntity,
   EnvelopeListQuestionRevisionEntity,
   EnvelopeListStr,
+  EnvelopeListSyncEntityVersionRecord,
   EnvelopeListUserEntity,
   EnvelopePaginatedResponseQuestionEntity,
   EnvelopePaperDraftDetail,
@@ -230,6 +274,13 @@ part 'serializers.g.dart';
   EnvelopeQuestionBankEntity,
   EnvelopeQuestionCorrectionEntity,
   EnvelopeQuestionEntity,
+  EnvelopeSyncAckResponse,
+  EnvelopeSyncConflictRecord,
+  EnvelopeSyncConflictResolutionRecord,
+  EnvelopeSyncPullResponse,
+  EnvelopeSyncPushResponse,
+  EnvelopeSyncSnapshotResponse,
+  EnvelopeSyncVersionRestoreRecord,
   EnvelopeTokenPair,
   EnvelopeUnionPaperExpandedEntityPaperEntity,
   EnvelopeUserEntity,
@@ -306,6 +357,29 @@ part 'serializers.g.dart';
   RefreshTokenRequest,
   RegisterRequest,
   SortOrder,
+  SyncAckRequest,
+  SyncAckResponse,
+  SyncChange,
+  SyncConflictReason,
+  SyncConflictRecord,
+  SyncConflictResolutionRecord,
+  SyncConflictResolutionRequest,
+  SyncConflictSnapshot,
+  SyncEntityType,
+  SyncEntityVersionRecord,
+  SyncError,
+  SyncErrorCode,
+  SyncMutation,
+  SyncMutationKind,
+  SyncOperationResult,
+  SyncOperationStatus,
+  SyncPullResponse,
+  SyncPushRequest,
+  SyncPushResponse,
+  SyncResolutionAction,
+  SyncSnapshotResponse,
+  SyncVersionRestoreRecord,
+  SyncVersionRestoreRequest,
   TokenPair,
   UserCreate,
   UserEntity,
@@ -315,20 +389,48 @@ part 'serializers.g.dart';
 ])
 Serializers serializers = (_$serializers.toBuilder()
       ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(DraftPresenceMember)]),
-        () => ListBuilder<DraftPresenceMember>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(QuestionRef)]),
-        () => ListBuilder<QuestionRef>(),
-      )
-      ..addBuilderFactory(
         const FullType(BuiltList, [FullType(GenerationTypeTarget)]),
         () => ListBuilder<GenerationTypeTarget>(),
       )
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(QuestionBankSummary)]),
         () => ListBuilder<QuestionBankSummary>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(SyncChange)]),
+        () => ListBuilder<SyncChange>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(PublicBankSummary)]),
+        () => ListBuilder<PublicBankSummary>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(QuestionCorrectionEntity)]),
+        () => ListBuilder<QuestionCorrectionEntity>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(PaperDraftCommentEntity)]),
+        () => ListBuilder<PaperDraftCommentEntity>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(QuestionOrderItem)]),
+        () => ListBuilder<QuestionOrderItem>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(LocationInner)]),
+        () => ListBuilder<LocationInner>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(SyncOperationResult)]),
+        () => ListBuilder<SyncOperationResult>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(DraftPresenceMember)]),
+        () => ListBuilder<DraftPresenceMember>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(QuestionRef)]),
+        () => ListBuilder<QuestionRef>(),
       )
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(DeviceSessionEntity)]),
@@ -351,32 +453,16 @@ Serializers serializers = (_$serializers.toBuilder()
         () => ListBuilder<PaperQuestionEntity>(),
       )
       ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(PublicBankSummary)]),
-        () => ListBuilder<PublicBankSummary>(),
-      )
-      ..addBuilderFactory(
         const FullType(BuiltList, [FullType(BankVersionSummary)]),
         () => ListBuilder<BankVersionSummary>(),
       )
       ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(QuestionCorrectionEntity)]),
-        () => ListBuilder<QuestionCorrectionEntity>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(PaperDraftCommentEntity)]),
-        () => ListBuilder<PaperDraftCommentEntity>(),
+        const FullType(BuiltList, [FullType(int)]),
+        () => ListBuilder<int>(),
       )
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(QuestionImage)]),
         () => ListBuilder<QuestionImage>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(QuestionOrderItem)]),
-        () => ListBuilder<QuestionOrderItem>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(LocationInner)]),
-        () => ListBuilder<LocationInner>(),
       )
       ..addBuilderFactory(
         const FullType(
@@ -390,6 +476,10 @@ Serializers serializers = (_$serializers.toBuilder()
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(UserEntity)]),
         () => ListBuilder<UserEntity>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(SyncMutation)]),
+        () => ListBuilder<SyncMutation>(),
       )
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(PaperDraftSummary)]),
@@ -406,6 +496,10 @@ Serializers serializers = (_$serializers.toBuilder()
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(BankMemberEntity)]),
         () => ListBuilder<BankMemberEntity>(),
+      )
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(SyncEntityVersionRecord)]),
+        () => ListBuilder<SyncEntityVersionRecord>(),
       )
       ..add(const OneOfSerializer())
       ..add(const AnyOfSerializer())

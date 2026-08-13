@@ -9,7 +9,7 @@ enum SyncConflictMutationKind {
   detach
 }
 
-enum SyncConflictReason {
+enum ClassifiedSyncConflictReason {
   concurrentCreate,
   divergentContent,
   tombstoneDivergence,
@@ -17,7 +17,7 @@ enum SyncConflictReason {
   renameDivergence,
 }
 
-enum SyncResolutionAction {
+enum SyncFixtureResolutionAction {
   keepLocal,
   useCloud,
   saveCopy,
@@ -26,8 +26,8 @@ enum SyncResolutionAction {
   undo,
 }
 
-class SyncConflictSnapshot {
-  const SyncConflictSnapshot({
+class SyncConflictFixtureSnapshot {
+  const SyncConflictFixtureSnapshot({
     required this.schemaVersion,
     required this.version,
     required this.contentHash,
@@ -48,8 +48,8 @@ class SyncConflictSnapshot {
   final DateTime modifiedAt;
 }
 
-class SyncConflictRecord {
-  const SyncConflictRecord({
+class SyncConflictFixtureRecord {
+  const SyncConflictFixtureRecord({
     required this.conflictId,
     required this.entityType,
     required this.entityId,
@@ -60,7 +60,11 @@ class SyncConflictRecord {
     required this.detectedAt,
   }) : assert(entityType == 'question' ||
             entityType == 'paper' ||
-            entityType == 'draft');
+            entityType == 'draft' ||
+            entityType == 'attachment' ||
+            entityType == 'comment' ||
+            entityType == 'favorite' ||
+            entityType == 'setting');
 
   static const protocolVersion = 1;
   static const origin = 'personalSync';
@@ -68,14 +72,14 @@ class SyncConflictRecord {
   final String conflictId;
   final String entityType;
   final String entityId;
-  final SyncConflictReason reason;
-  final SyncConflictSnapshot? base;
-  final SyncConflictSnapshot local;
-  final SyncConflictSnapshot cloud;
+  final ClassifiedSyncConflictReason reason;
+  final SyncConflictFixtureSnapshot? base;
+  final SyncConflictFixtureSnapshot local;
+  final SyncConflictFixtureSnapshot cloud;
   final DateTime detectedAt;
 }
 
-SyncConflictReason? classifySyncConflict({
+ClassifiedSyncConflictReason? classifySyncConflict({
   required SyncConflictMutationKind localKind,
   required SyncConflictMutationKind cloudKind,
   required String localContentHash,
@@ -84,19 +88,19 @@ SyncConflictReason? classifySyncConflict({
   if (localContentHash == cloudContentHash) return null;
   if (localKind == SyncConflictMutationKind.create &&
       cloudKind == SyncConflictMutationKind.create) {
-    return SyncConflictReason.concurrentCreate;
+    return ClassifiedSyncConflictReason.concurrentCreate;
   }
   if (localKind == SyncConflictMutationKind.delete ||
       cloudKind == SyncConflictMutationKind.delete) {
-    return SyncConflictReason.tombstoneDivergence;
+    return ClassifiedSyncConflictReason.tombstoneDivergence;
   }
   if (localKind == SyncConflictMutationKind.restore ||
       cloudKind == SyncConflictMutationKind.restore) {
-    return SyncConflictReason.restoreDivergence;
+    return ClassifiedSyncConflictReason.restoreDivergence;
   }
   if (localKind == SyncConflictMutationKind.rename ||
       cloudKind == SyncConflictMutationKind.rename) {
-    return SyncConflictReason.renameDivergence;
+    return ClassifiedSyncConflictReason.renameDivergence;
   }
-  return SyncConflictReason.divergentContent;
+  return ClassifiedSyncConflictReason.divergentContent;
 }

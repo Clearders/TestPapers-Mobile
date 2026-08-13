@@ -9,6 +9,10 @@ part of 'serializers.dart';
 Serializers _$serializers = (Serializers().toBuilder()
       ..add(Answer.serializer)
       ..add(Answer1.serializer)
+      ..add(AttachmentChunkReceipt.serializer)
+      ..add(AttachmentUploadCompleteRequest.serializer)
+      ..add(AttachmentUploadInitiateRequest.serializer)
+      ..add(AttachmentUploadStatus.serializer)
       ..add(AuthConnectedEvent.serializer)
       ..add(AuthConnectedEventEventEnum.serializer)
       ..add(AuthConnectedPayload.serializer)
@@ -59,6 +63,10 @@ Serializers _$serializers = (Serializers().toBuilder()
       ..add(DraftUnsubscribeEvent.serializer)
       ..add(DraftUnsubscribeEventEventEnum.serializer)
       ..add(DraftUserRef.serializer)
+      ..add(EnvelopeAttachmentChunkReceipt.serializer)
+      ..add(EnvelopeAttachmentChunkReceiptSuccessEnum.serializer)
+      ..add(EnvelopeAttachmentUploadStatus.serializer)
+      ..add(EnvelopeAttachmentUploadStatusSuccessEnum.serializer)
       ..add(EnvelopeAuthSession.serializer)
       ..add(EnvelopeAuthSessionSuccessEnum.serializer)
       ..add(EnvelopeBankPublicationEntity.serializer)
@@ -87,6 +95,8 @@ Serializers _$serializers = (Serializers().toBuilder()
       ..add(EnvelopeListQuestionRevisionEntitySuccessEnum.serializer)
       ..add(EnvelopeListStr.serializer)
       ..add(EnvelopeListStrSuccessEnum.serializer)
+      ..add(EnvelopeListSyncEntityVersionRecord.serializer)
+      ..add(EnvelopeListSyncEntityVersionRecordSuccessEnum.serializer)
       ..add(EnvelopeListUserEntity.serializer)
       ..add(EnvelopeListUserEntitySuccessEnum.serializer)
       ..add(EnvelopePaginatedResponseQuestionEntity.serializer)
@@ -105,6 +115,20 @@ Serializers _$serializers = (Serializers().toBuilder()
       ..add(EnvelopeQuestionCorrectionEntitySuccessEnum.serializer)
       ..add(EnvelopeQuestionEntity.serializer)
       ..add(EnvelopeQuestionEntitySuccessEnum.serializer)
+      ..add(EnvelopeSyncAckResponse.serializer)
+      ..add(EnvelopeSyncAckResponseSuccessEnum.serializer)
+      ..add(EnvelopeSyncConflictRecord.serializer)
+      ..add(EnvelopeSyncConflictRecordSuccessEnum.serializer)
+      ..add(EnvelopeSyncConflictResolutionRecord.serializer)
+      ..add(EnvelopeSyncConflictResolutionRecordSuccessEnum.serializer)
+      ..add(EnvelopeSyncPullResponse.serializer)
+      ..add(EnvelopeSyncPullResponseSuccessEnum.serializer)
+      ..add(EnvelopeSyncPushResponse.serializer)
+      ..add(EnvelopeSyncPushResponseSuccessEnum.serializer)
+      ..add(EnvelopeSyncSnapshotResponse.serializer)
+      ..add(EnvelopeSyncSnapshotResponseSuccessEnum.serializer)
+      ..add(EnvelopeSyncVersionRestoreRecord.serializer)
+      ..add(EnvelopeSyncVersionRestoreRecordSuccessEnum.serializer)
       ..add(EnvelopeTokenPair.serializer)
       ..add(EnvelopeTokenPairSuccessEnum.serializer)
       ..add(EnvelopeUnionPaperExpandedEntityPaperEntity.serializer)
@@ -193,6 +217,35 @@ Serializers _$serializers = (Serializers().toBuilder()
       ..add(RefreshTokenRequest.serializer)
       ..add(RegisterRequest.serializer)
       ..add(SortOrder.serializer)
+      ..add(SyncAckRequest.serializer)
+      ..add(SyncAckResponse.serializer)
+      ..add(SyncChange.serializer)
+      ..add(SyncConflictReason.serializer)
+      ..add(SyncConflictRecord.serializer)
+      ..add(SyncConflictRecordOriginEnum.serializer)
+      ..add(SyncConflictRecordProtocolVersionEnum.serializer)
+      ..add(SyncConflictResolutionRecord.serializer)
+      ..add(SyncConflictResolutionRecordProtocolVersionEnum.serializer)
+      ..add(SyncConflictResolutionRequest.serializer)
+      ..add(SyncConflictResolutionRequestProtocolVersionEnum.serializer)
+      ..add(SyncConflictSnapshot.serializer)
+      ..add(SyncEntityType.serializer)
+      ..add(SyncEntityVersionRecord.serializer)
+      ..add(SyncError.serializer)
+      ..add(SyncErrorCode.serializer)
+      ..add(SyncMutation.serializer)
+      ..add(SyncMutationKind.serializer)
+      ..add(SyncOperationResult.serializer)
+      ..add(SyncOperationStatus.serializer)
+      ..add(SyncPullResponse.serializer)
+      ..add(SyncPushRequest.serializer)
+      ..add(SyncPushResponse.serializer)
+      ..add(SyncResolutionAction.serializer)
+      ..add(SyncSnapshotResponse.serializer)
+      ..add(SyncVersionRestoreRecord.serializer)
+      ..add(SyncVersionRestoreRecordProtocolVersionEnum.serializer)
+      ..add(SyncVersionRestoreRequest.serializer)
+      ..add(SyncVersionRestoreRequestProtocolVersionEnum.serializer)
       ..add(TokenPair.serializer)
       ..add(UserCreate.serializer)
       ..add(UserEntity.serializer)
@@ -341,6 +394,9 @@ Serializers _$serializers = (Serializers().toBuilder()
           const FullType(BuiltList, const [const FullType(String)]),
           () => ListBuilder<String>())
       ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(String)]),
+          () => ListBuilder<String>())
+      ..addBuilderFactory(
           const FullType(
               BuiltList, const [const FullType(GenerationTypeTarget)]),
           () => ListBuilder<GenerationTypeTarget>())
@@ -351,6 +407,32 @@ Serializers _$serializers = (Serializers().toBuilder()
           const FullType(BuiltList, const [const FullType(String)]),
           () => ListBuilder<String>())
       ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(String)]),
+          () => ListBuilder<String>())
+      ..addBuilderFactory(
+          const FullType(BuiltMap, const [
+            const FullType(String),
+            const FullType.nullable(JsonObject)
+          ]),
+          () => MapBuilder<String, JsonObject?>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(SyncChange)]),
+          () => ListBuilder<SyncChange>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(SyncChange)]),
+          () => ListBuilder<SyncChange>())
+      ..addBuilderFactory(
+          const FullType(
+              BuiltList, const [const FullType(SyncEntityVersionRecord)]),
+          () => ListBuilder<SyncEntityVersionRecord>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(SyncMutation)]),
+          () => ListBuilder<SyncMutation>())
+      ..addBuilderFactory(
+          const FullType(
+              BuiltList, const [const FullType(SyncOperationResult)]),
+          () => ListBuilder<SyncOperationResult>())
+      ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(UserEntity)]),
           () => ListBuilder<UserEntity>())
       ..addBuilderFactory(
@@ -360,6 +442,42 @@ Serializers _$serializers = (Serializers().toBuilder()
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(ValidationError)]),
           () => ListBuilder<ValidationError>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(int)]),
+          () => ListBuilder<int>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(int)]),
+          () => ListBuilder<int>())
+      ..addBuilderFactory(
+          const FullType(BuiltMap, const [
+            const FullType(String),
+            const FullType.nullable(JsonObject)
+          ]),
+          () => MapBuilder<String, JsonObject?>())
+      ..addBuilderFactory(
+          const FullType(BuiltMap, const [
+            const FullType(String),
+            const FullType.nullable(JsonObject)
+          ]),
+          () => MapBuilder<String, JsonObject?>())
+      ..addBuilderFactory(
+          const FullType(BuiltMap, const [
+            const FullType(String),
+            const FullType.nullable(JsonObject)
+          ]),
+          () => MapBuilder<String, JsonObject?>())
+      ..addBuilderFactory(
+          const FullType(BuiltMap, const [
+            const FullType(String),
+            const FullType.nullable(JsonObject)
+          ]),
+          () => MapBuilder<String, JsonObject?>())
+      ..addBuilderFactory(
+          const FullType(BuiltMap, const [
+            const FullType(String),
+            const FullType.nullable(JsonObject)
+          ]),
+          () => MapBuilder<String, JsonObject?>())
       ..addBuilderFactory(
           const FullType(BuiltMap, const [
             const FullType(String),

@@ -50,7 +50,7 @@ void main() {
       for (final value in SyncConflictMutationKind.values) value.name: value
     };
     final reasons = {
-      for (final value in SyncConflictReason.values) value.name: value
+      for (final value in ClassifiedSyncConflictReason.values) value.name: value
     };
 
     for (final value in fixtures['conflictCases'] as List<Object?>) {
@@ -75,8 +75,8 @@ void main() {
       (fixtures['resolutionCases'] as List<Object?>)
           .map((value) => (value as Map<String, Object?>)['action'])
           .toList(),
-      SyncResolutionAction.values.map((value) => value.name).toList(),
+      SyncFixtureResolutionAction.values.map((value) => value.name).toList(),
     );
-    expect(SyncConflictRecord.origin, 'personalSync');
+    expect(SyncConflictFixtureRecord.origin, 'personalSync');
   });
 }

@@ -19,6 +19,7 @@ import 'package:testpapers_cloud_api/src/api/metadata_api.dart';
 import 'package:testpapers_cloud_api/src/api/papers_api.dart';
 import 'package:testpapers_cloud_api/src/api/public_banks_api.dart';
 import 'package:testpapers_cloud_api/src/api/questions_api.dart';
+import 'package:testpapers_cloud_api/src/api/sync_api.dart';
 import 'package:testpapers_cloud_api/src/api/tasks_api.dart';
 import 'package:testpapers_cloud_api/src/api/users_api.dart';
 
@@ -200,6 +201,12 @@ class TestpapersCloudApi {
   /// by doing that all interceptors will not be executed
   QuestionsApi getQuestionsApi() {
     return QuestionsApi(dio, serializers);
+  }
+
+  /// Get SyncApi instance, base route and serializer can be overridden by a given but be careful,
+  /// by doing that all interceptors will not be executed
+  SyncApi getSyncApi() {
+    return SyncApi(dio, serializers);
   }
 
   /// Get TasksApi instance, base route and serializer can be overridden by a given but be careful,
