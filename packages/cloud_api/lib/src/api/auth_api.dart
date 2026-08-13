@@ -635,7 +635,25 @@ class AuthApi {
         ...?headers,
       },
       extra: <String, dynamic>{
-        'secure': <Map<String, String>>[],
+        'secure': <Map<String, String>>[
+          {
+            'type': 'apiKey',
+            'name': 'csrfToken',
+            'keyName': 'X-CSRF-Token',
+            'where': 'header',
+          },
+          {
+            'type': 'apiKey',
+            'name': 'cookieAuth',
+            'keyName': 'testpapers_session',
+            'where': '',
+          },
+          {
+            'type': 'http',
+            'scheme': 'bearer',
+            'name': 'bearerAuth',
+          },
+        ],
         ...?extra,
       },
       contentType: 'application/json',
@@ -731,7 +749,25 @@ class AuthApi {
         ...?headers,
       },
       extra: <String, dynamic>{
-        'secure': <Map<String, String>>[],
+        'secure': <Map<String, String>>[
+          {
+            'type': 'apiKey',
+            'name': 'csrfToken',
+            'keyName': 'X-CSRF-Token',
+            'where': 'header',
+          },
+          {
+            'type': 'apiKey',
+            'name': 'cookieAuth',
+            'keyName': 'testpapers_session',
+            'where': '',
+          },
+          {
+            'type': 'http',
+            'scheme': 'bearer',
+            'name': 'bearerAuth',
+          },
+        ],
         ...?extra,
       },
       contentType: 'application/json',
@@ -837,6 +873,11 @@ class AuthApi {
             'name': 'cookieAuth',
             'keyName': 'testpapers_session',
             'where': '',
+          },
+          {
+            'type': 'http',
+            'scheme': 'bearer',
+            'name': 'bearerAuth',
           },
         ],
         ...?extra,
