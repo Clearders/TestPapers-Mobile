@@ -35,6 +35,9 @@ REQUIRED_FILES = (
 MOBILE_CONTRACT_FILES = (
     ".github/workflows/cloud-api-contract.yml",
     "contracts/contract.lock.json",
+    "contracts/sync-v1.schema.json",
+    "contracts/sync-v1.fixtures.json",
+    "contracts/sync-v1.lock.json",
     "contracts/dart-dio-config.yaml",
     "contracts/openapi.json",
     "packages/cloud_api/lib/cloud_api.dart",
@@ -44,6 +47,7 @@ MOBILE_CONTRACT_FILES = (
     "packages/cloud_api/pubspec.yaml",
     "packages/cloud_api/test/cloud_api_adapter_test.dart",
     "scripts/check_cloud_api_drift.py",
+    "scripts/check_sync_contract.py",
     "scripts/cloud_api_codegen.py",
     "scripts/regenerate_cloud_api.py",
 )
