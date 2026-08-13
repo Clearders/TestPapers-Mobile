@@ -86,6 +86,7 @@ export 'package:testpapers_cloud_api/src/model/envelope_list_question_correction
 export 'package:testpapers_cloud_api/src/model/envelope_list_question_entity.dart';
 export 'package:testpapers_cloud_api/src/model/envelope_list_question_revision_entity.dart';
 export 'package:testpapers_cloud_api/src/model/envelope_list_str.dart';
+export 'package:testpapers_cloud_api/src/model/envelope_list_sync_conflict_resolution_record.dart';
 export 'package:testpapers_cloud_api/src/model/envelope_list_sync_entity_version_record.dart';
 export 'package:testpapers_cloud_api/src/model/envelope_list_user_entity.dart';
 export 'package:testpapers_cloud_api/src/model/envelope_paginated_response_question_entity.dart';

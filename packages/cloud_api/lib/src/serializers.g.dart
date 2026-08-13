@@ -95,6 +95,8 @@ Serializers _$serializers = (Serializers().toBuilder()
       ..add(EnvelopeListQuestionRevisionEntitySuccessEnum.serializer)
       ..add(EnvelopeListStr.serializer)
       ..add(EnvelopeListStrSuccessEnum.serializer)
+      ..add(EnvelopeListSyncConflictResolutionRecord.serializer)
+      ..add(EnvelopeListSyncConflictResolutionRecordSuccessEnum.serializer)
       ..add(EnvelopeListSyncEntityVersionRecord.serializer)
       ..add(EnvelopeListSyncEntityVersionRecordSuccessEnum.serializer)
       ..add(EnvelopeListUserEntity.serializer)
@@ -421,6 +423,10 @@ Serializers _$serializers = (Serializers().toBuilder()
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(SyncChange)]),
           () => ListBuilder<SyncChange>())
+      ..addBuilderFactory(
+          const FullType(
+              BuiltList, const [const FullType(SyncConflictResolutionRecord)]),
+          () => ListBuilder<SyncConflictResolutionRecord>())
       ..addBuilderFactory(
           const FullType(
               BuiltList, const [const FullType(SyncEntityVersionRecord)]),

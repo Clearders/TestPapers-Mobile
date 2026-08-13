@@ -76,6 +76,7 @@ import 'package:testpapers_cloud_api/src/model/envelope_list_question_correction
 import 'package:testpapers_cloud_api/src/model/envelope_list_question_entity.dart';
 import 'package:testpapers_cloud_api/src/model/envelope_list_question_revision_entity.dart';
 import 'package:testpapers_cloud_api/src/model/envelope_list_str.dart';
+import 'package:testpapers_cloud_api/src/model/envelope_list_sync_conflict_resolution_record.dart';
 import 'package:testpapers_cloud_api/src/model/envelope_list_sync_entity_version_record.dart';
 import 'package:testpapers_cloud_api/src/model/envelope_list_user_entity.dart';
 import 'package:testpapers_cloud_api/src/model/envelope_paginated_response_question_entity.dart';
@@ -264,6 +265,7 @@ part 'serializers.g.dart';
   EnvelopeListQuestionEntity,
   EnvelopeListQuestionRevisionEntity,
   EnvelopeListStr,
+  EnvelopeListSyncConflictResolutionRecord,
   EnvelopeListSyncEntityVersionRecord,
   EnvelopeListUserEntity,
   EnvelopePaginatedResponseQuestionEntity,
@@ -388,6 +390,10 @@ part 'serializers.g.dart';
   ValidationError,
 ])
 Serializers serializers = (_$serializers.toBuilder()
+      ..addBuilderFactory(
+        const FullType(BuiltList, [FullType(SyncConflictResolutionRecord)]),
+        () => ListBuilder<SyncConflictResolutionRecord>(),
+      )
       ..addBuilderFactory(
         const FullType(BuiltList, [FullType(GenerationTypeTarget)]),
         () => ListBuilder<GenerationTypeTarget>(),

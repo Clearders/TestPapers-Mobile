@@ -151,6 +151,8 @@ lib/src/model/envelope_list_question_revision_entity.dart
 lib/src/model/envelope_list_question_revision_entity.g.dart
 lib/src/model/envelope_list_str.dart
 lib/src/model/envelope_list_str.g.dart
+lib/src/model/envelope_list_sync_conflict_resolution_record.dart
+lib/src/model/envelope_list_sync_conflict_resolution_record.g.dart
 lib/src/model/envelope_list_sync_entity_version_record.dart
 lib/src/model/envelope_list_sync_entity_version_record.g.dart
 lib/src/model/envelope_list_user_entity.dart
