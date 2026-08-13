@@ -253,6 +253,20 @@ def normalize_generator_output(destination: Path) -> None:
         lines = [line for line in lines if line.strip() != "pubspec.lock"]
         gitignore.write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
 
+    pubspec = destination / "pubspec.yaml"
+    pubspec_content = pubspec.read_text(encoding="utf-8")
+    dependency_anchor = "  build_runner: any\n  test: '^1.16.0'"
+    if pubspec_content.count(dependency_anchor) != 1:
+        raise ContractError("generated pubspec test dependency anchor changed")
+    pubspec.write_text(
+        pubspec_content.replace(
+            dependency_anchor,
+            "  build_runner: any\n  crypto: 3.0.7\n  test: '^1.16.0'",
+        ),
+        encoding="utf-8",
+        newline="\n",
+    )
+
     replacements = 0
     for api_file in sorted((destination / "lib" / "src" / "api").glob("*.dart")):
         output: list[str] = []
