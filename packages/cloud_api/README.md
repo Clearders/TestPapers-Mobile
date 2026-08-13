@@ -146,6 +146,7 @@ Class | Method | HTTP request | Description
 [*SyncApi*](doc/SyncApi.md) | [**getSyncConflict**](doc/SyncApi.md#getsyncconflict) | **GET** /api/v1/sync/conflicts/{conflict_id} | Get Sync Conflict
 [*SyncApi*](doc/SyncApi.md) | [**getSyncSnapshot**](doc/SyncApi.md#getsyncsnapshot) | **GET** /api/v1/sync/snapshot | Get Sync Snapshot
 [*SyncApi*](doc/SyncApi.md) | [**initiateSyncAttachmentUpload**](doc/SyncApi.md#initiatesyncattachmentupload) | **POST** /api/v1/sync/attachments/uploads | Initiate Sync Attachment Upload
+[*SyncApi*](doc/SyncApi.md) | [**listSyncConflictResolutions**](doc/SyncApi.md#listsyncconflictresolutions) | **GET** /api/v1/sync/conflicts/{conflict_id}/resolutions | List Sync Conflict Resolutions
 [*SyncApi*](doc/SyncApi.md) | [**listSyncEntityVersions**](doc/SyncApi.md#listsyncentityversions) | **GET** /api/v1/sync/entities/{entity_type}/{entity_id}/versions | List Sync Entity Versions
 [*SyncApi*](doc/SyncApi.md) | [**pullSyncChanges**](doc/SyncApi.md#pullsyncchanges) | **GET** /api/v1/sync/pull | Pull Sync Changes
 [*SyncApi*](doc/SyncApi.md) | [**pushSyncMutations**](doc/SyncApi.md#pushsyncmutations) | **POST** /api/v1/sync/push | Push Sync Mutations
@@ -229,6 +230,7 @@ Class | Method | HTTP request | Description
  - [EnvelopeListQuestionEntity](doc/EnvelopeListQuestionEntity.md)
  - [EnvelopeListQuestionRevisionEntity](doc/EnvelopeListQuestionRevisionEntity.md)
  - [EnvelopeListStr](doc/EnvelopeListStr.md)
+ - [EnvelopeListSyncConflictResolutionRecord](doc/EnvelopeListSyncConflictResolutionRecord.md)
  - [EnvelopeListSyncEntityVersionRecord](doc/EnvelopeListSyncEntityVersionRecord.md)
  - [EnvelopeListUserEntity](doc/EnvelopeListUserEntity.md)
  - [EnvelopePaginatedResponseQuestionEntity](doc/EnvelopePaginatedResponseQuestionEntity.md)
