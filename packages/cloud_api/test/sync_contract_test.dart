@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:test/test.dart';
+import 'package:testpapers_cloud_api/cloud_api.dart';
 
 String canonicalJson(Object? value) {
   if (value is List<Object?>) {
@@ -39,5 +40,43 @@ void main() {
       );
       expect(testCase['sha256'], matches(RegExp(r'^[0-9a-f]{64}$')));
     }
+  });
+
+  test('Dart classifies every pinned conflict and resolution action', () {
+    final fixtures = jsonDecode(
+      File('../../contracts/sync-v1.fixtures.json').readAsStringSync(),
+    ) as Map<String, Object?>;
+    final kinds = {
+      for (final value in SyncConflictMutationKind.values) value.name: value
+    };
+    final reasons = {
+      for (final value in SyncConflictReason.values) value.name: value
+    };
+
+    for (final value in fixtures['conflictCases'] as List<Object?>) {
+      final testCase = value as Map<String, Object?>;
+      final localHash = List.filled(64, 'a').join();
+      final cloudHash = testCase['sameHash'] == true
+          ? localHash
+          : List.filled(64, 'b').join();
+      expect(
+        classifySyncConflict(
+          localKind: kinds[testCase['localKind']]!,
+          cloudKind: kinds[testCase['cloudKind']]!,
+          localContentHash: localHash,
+          cloudContentHash: cloudHash,
+        ),
+        testCase['reason'] == null ? isNull : reasons[testCase['reason']],
+        reason: testCase['name'] as String,
+      );
+    }
+
+    expect(
+      (fixtures['resolutionCases'] as List<Object?>)
+          .map((value) => (value as Map<String, Object?>)['action'])
+          .toList(),
+      SyncResolutionAction.values.map((value) => value.name).toList(),
+    );
+    expect(SyncConflictRecord.origin, 'personalSync');
   });
 }
